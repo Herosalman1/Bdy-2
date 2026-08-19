@@ -3,254 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎂 A Surprise For You</title>
+    <title>Happy Birthday! 🎂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700&family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #09020f;
-            --primary: #c026d3;
-            --secondary: #9333ea;
-            --accent: #f472b6;
-            --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
+            --bg-dark: #1b0a1d;
+            --bg-light: #2d1433;
+            --primary-pink: #ff7eb3;
+            --primary-purple: #a020f0;
+            --text-light: #fce7f3;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg-base); 
-            color: var(--text-main); 
-            font-family: 'Poppins', sans-serif; 
-            height: 100vh; 
-            width: 100vw; 
-            overflow: hidden; 
-            position: relative; 
-        }
+        body { background: var(--bg-dark); color: white; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; overflow: hidden; position: relative; }
 
-        /* --- BACKGROUND AURORA & STARS --- */
-        .aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
-        .aurora-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 10s infinite alternate ease-in-out; }
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--secondary); animation-delay: 0s; }
-        .blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--primary); animation-delay: 2s; }
-        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: rgba(244, 114, 182, 0.3); animation-delay: 4s; }
-        
-        .stars { position: absolute; inset: 0; background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; opacity: 0.3; animation: twinkle 4s infinite alternate; z-index: 1; pointer-events: none; }
+        .screen { height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; transition: opacity 1s ease-in-out, transform 1s ease-in-out; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #screen-1 { background: radial-gradient(circle at center, #2d1433 0%, #110613 100%); z-index: 100; }
+        #screen-1.hidden { opacity: 0; transform: scale(1.1); pointer-events: none; }
+        #screen-2, #screen-3, #screen-4 { background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 50%, var(--bg-dark) 100%); opacity: 0; pointer-events: none; z-index: 50; }
+        #screen-2.visible, #screen-3.visible, #screen-4.visible { opacity: 1; pointer-events: all; }
+        #screen-2.hidden, #screen-3.hidden { opacity: 0; transform: scale(0.9); pointer-events: none; }
+        #screen-2::before, #screen-3::before, #screen-4::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 30px 30px; z-index: 0; }
 
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
-        @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 0.6; } }
+        .container { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; max-width: 600px; padding: 0 20px; text-align: center; }
 
-        /* --- SCREEN MANAGEMENT --- */
-        .screen { 
-            position: absolute; inset: 0; z-index: 10; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            opacity: 0; pointer-events: none; 
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out; 
-            text-align: center; padding: 0 20px;
-        }
-        .screen.active { opacity: 1; pointer-events: all; transform: scale(1); }
-        .screen.hidden { opacity: 0; transform: scale(1.05); pointer-events: none; }
+        .intro-text-1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 8vw, 2.5rem); color: rgba(255, 255, 255, 0.6); margin-bottom: 15px; }
+        .intro-text-2 { font-size: clamp(0.9rem, 4vw, 1rem); color: rgba(255, 255, 255, 0.7); margin-bottom: 10px; line-height: 1.6; }
+        .intro-text-3 { font-size: clamp(1rem, 4.5vw, 1.1rem); color: white; margin-bottom: 40px; font-weight: 500; }
+        .happy-birthday { font-weight: 600; letter-spacing: 6px; font-size: clamp(1rem, 4vw, 1.2rem); color: var(--text-light); text-transform: uppercase; margin-bottom: 10px; transition: opacity 0.5s ease; }
+        .name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 12vw, 5rem); font-weight: 500; background: -webkit-linear-gradient(left, #ff8da1, #c874ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-shadow: 0 0 30px rgba(255, 126, 179, 0.2); word-break: break-word; }
+        .heart { color: #ff3366; font-size: 1.5rem; margin-bottom: 25px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        /* --- TYPOGRAPHY --- */
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-script { font-family: 'Dancing Script', cursive; }
-        
-        h1.name-title { 
-            font-size: clamp(3.5rem, 12vw, 5.5rem); 
-            background: linear-gradient(to right, #fbcfe8, #d8b4fe); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin: 10px 0;
-            text-shadow: 0 0 40px rgba(216, 180, 254, 0.4);
-        }
-        .subtitle { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; margin-bottom: 20px; }
-        .tracking-wide { letter-spacing: 0.2em; text-transform: uppercase; font-size: 1rem; font-weight: 600; }
+        .glow-btn, .wish-btn { background: linear-gradient(90deg, #d359b3, #904dd9); border: none; padding: 15px 30px; border-radius: 30px; color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: clamp(0.9rem, 4vw, 1rem); cursor: pointer; box-shadow: 0 0 20px rgba(255, 126, 179, 0.4); transition: all 0.3s ease; position: relative; z-index: 20; }
+        .glow-btn:hover, .wish-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 126, 179, 0.7); }
 
-        /* --- GLOW BUTTONS --- */
-        .glow-btn {
-            background: linear-gradient(135deg, #d946ef, #8b5cf6);
-            border: none; padding: 14px 32px; border-radius: 50px;
-            color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.95rem;
-            cursor: pointer; position: relative; z-index: 20;
-            box-shadow: 0 0 25px rgba(217, 70, 239, 0.5), inset 0 0 10px rgba(255,255,255,0.2);
-            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
-            margin-top: 25px;
-        }
-        .glow-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 35px rgba(217, 70, 239, 0.7), inset 0 0 15px rgba(255,255,255,0.3); }
-
-        /* --- GIFT BOX UI --- */
-        .gift-container { position: relative; margin: 30px 0; animation: bounce 2s infinite ease-in-out; }
-        .gift-box {
-            width: 120px; height: 100px;
-            background: linear-gradient(135deg, #1e1b4b, #0f172a);
-            border-radius: 12px; position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
-        }
-        .gift-box::before { /* Vertical Ribbon */
-            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
-            width: 20px; height: 100%; background: linear-gradient(to bottom, #d946ef, #a855f7);
-            box-shadow: 0 0 10px rgba(217, 70, 239, 0.5);
-        }
-        .gift-box::after { /* Horizontal Ribbon */
-            content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-            width: 100%; height: 20px; background: linear-gradient(to right, #d946ef, #a855f7);
-            box-shadow: 0 0 10px rgba(217, 70, 239, 0.5);
-        }
-        .gift-lid {
-            width: 130px; height: 30px;
-            background: linear-gradient(135deg, #e879f9, #c026d3);
-            border-radius: 8px; position: absolute; top: -15px; left: -5px; z-index: 2;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.4);
-        }
-        .gift-bow {
-            position: absolute; top: -35px; left: 50%; transform: translateX(-50%);
-            width: 40px; height: 20px; z-index: 3;
-            border: 3px solid #f0abfc; border-radius: 50%;
-        }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* --- CAKE UI --- */
-        .cake-container { position: relative; margin: 30px 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+        .cake-container { position: relative; margin: 15px 0 35px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
         .candles { display: flex; gap: 15px; margin-bottom: -5px; z-index: 3; align-items: flex-end; }
-        .candle { width: 8px; height: 30px; background: linear-gradient(to right, #fdf4ff, #e879f9, #fdf4ff); border-radius: 4px; position: relative; }
-        .candle::before { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 2px; height: 6px; background: #333; }
-        .flame { 
-            position: absolute; top: -22px; left: 50%; transform: translateX(-50%); 
-            width: 14px; height: 22px; 
-            background: radial-gradient(ellipse at bottom, #ffffff 10%, #fde047 40%, #f97316 80%, transparent 100%); 
-            border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%; 
-            box-shadow: 0 -2px 10px rgba(253, 224, 71, 0.8), 0 0 30px rgba(249, 115, 22, 0.6); 
-            animation: flicker 0.15s infinite alternate; 
-        }
-        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) skewX(1deg); } 100% { transform: translateX(-50%) scale(1.05) skewX(-1deg); } }
-        .cake-tier-top { width: 150px; height: 50px; border-radius: 25px; z-index: 2; background: linear-gradient(to bottom, rgba(217, 70, 239, 0.8), rgba(168, 85, 247, 0.6)); border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.5); backdrop-filter: blur(10px); box-shadow: inset 0 0 20px rgba(255,255,255,0.2), 0 10px 20px rgba(0,0,0,0.5); }
-        .cake-tier-bottom { width: 190px; height: 60px; border-radius: 30px; margin-top: -20px; z-index: 1; background: linear-gradient(to bottom, rgba(168, 85, 247, 0.8), rgba(88, 28, 135, 0.6)); border: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px); box-shadow: inset 0 0 20px rgba(255,255,255,0.1), 0 15px 30px rgba(0,0,0,0.6); }
+        .candle { width: 8px; height: 30px; background: linear-gradient(to right, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%); border-radius: 4px; position: relative; box-shadow: inset 0 -5px 5px rgba(0,0,0,0.1); }
+        .candle::before { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 2px; height: 6px; background: #2b1b1b; border-radius: 2px 2px 0 0; }
+        .flame { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); width: 14px; height: 22px; background: radial-gradient(ellipse at bottom, #ffffff 10%, #ffeb3b 40%, #ff5722 80%, transparent 100%); border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%; box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); transform-origin: center bottom; }
+        .candle:nth-child(1) .flame { animation: flicker 0.12s infinite alternate, flame-glow 1.8s infinite alternate; }
+        .candle:nth-child(2) { height: 38px; } 
+        .candle:nth-child(2) .flame { animation: flicker 0.1s infinite alternate, flame-glow 2s infinite alternate; top: -24px; width: 16px; height: 24px; }
+        .candle:nth-child(3) .flame { animation: flicker 0.15s infinite alternate, flame-glow 2.2s infinite alternate; }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 0.9; } 25% { transform: translateX(-50%) scale(1.02) skewX(2deg); opacity: 1; } 50% { transform: translateX(-50%) scale(0.98) skewX(-2deg); opacity: 0.85; } 75% { transform: translateX(-50%) scale(1.04) skewX(1deg); opacity: 0.95; } 100% { transform: translateX(-50%) scale(1) skewX(-1deg); opacity: 1; } }
+        @keyframes flame-glow { 0% { box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); } 100% { box-shadow: 0 -4px 15px rgba(255, 165, 0, 0.9), 0 -8px 25px rgba(255, 69, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6); } }
+        .cake-tier-top, .cake-tier-bottom { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 126, 179, 0.2); }
+        .cake-tier-top { width: 140px; height: 45px; border-radius: 22px; z-index: 2; }
+        .cake-tier-bottom { width: 180px; height: 55px; border-radius: 27px; margin-top: -15px; z-index: 1; }
 
-        /* --- ENVELOPE / LETTER UI --- */
-        .envelope-container { position: relative; width: min(90vw, 340px); height: 230px; margin: 20px auto; perspective: 1500px; cursor: pointer; z-index: 10; }
+        .envelope-container { position: relative; width: min(90vw, 320px); height: 220px; margin-top: 10px; perspective: 1500px; cursor: pointer; z-index: 10; }
         .envelope { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .envelope-container:not(.open):hover .envelope { transform: translateY(-5px); }
-        .envelope-back { position: absolute; inset: 0; background: linear-gradient(135deg, #4c1d95, #2e1065); border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); z-index: 1; }
-        .envelope-front { position: absolute; inset: 0; background: linear-gradient(135deg, #6d28d9, #4c1d95); clip-path: polygon(0 35%, 50% 65%, 100% 35%, 100% 100%, 0% 100%); border-radius: 12px; z-index: 3; box-shadow: inset 0 0 20px rgba(0,0,0,0.3); }
-        .envelope-flap { position: absolute; inset: 0 0 30% 0; background: linear-gradient(135deg, #7e22ce, #581c87); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; z-index: 4; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 12px 12px 0 0; display: flex; justify-content: center; }
-        .wax-seal { position: absolute; bottom: 8%; width: 50px; height: 50px; background: radial-gradient(circle, #ec4899, #be185d); border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
-        .wax-seal::after { content: '❤️'; font-size: 1.3rem; }
+        .envelope-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #64197a, #3b0a4a); border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 1; }
+        .envelope-front { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #8926a6, #58146e); clip-path: polygon(0 35%, 50% 65%, 100% 35%, 100% 100%, 0% 100%); border-radius: 8px; z-index: 3; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(135deg, #9b31ba, #72198c); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; z-index: 4; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 8px 8px 0 0; display: flex; justify-content: center; }
+        .wax-seal { position: absolute; bottom: 5%; width: 45px; height: 45px; background: radial-gradient(circle, #ff3b68, #b8002b); border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
+        .wax-seal::after { content: '❤️'; font-size: 1.2rem; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 
-        .letter { position: absolute; bottom: 15px; left: 15px; right: 15px; height: max-content; max-height: 200px; background: #fffcf7; border-radius: 8px; z-index: 2; box-shadow: 0 2px 15px rgba(0,0,0,0.4); padding: 30px 25px; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, z-index 0s 0.4s; text-align: left; overflow: hidden; }
-        .letter::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(217, 70, 239, 0.3); border-radius: 4px; pointer-events: none; }
-        .letter-title { font-family: 'Playfair Display', serif; color: #a855f7; font-size: 1.4rem; margin-bottom: 12px; }
-        .letter-body { font-family: 'Poppins', sans-serif; color: #334155; font-size: 0.9rem; line-height: 1.7; font-weight: 500; }
+        .letter { position: absolute; bottom: 15px; left: 15px; right: 15px; height: max-content; max-height: 190px; overflow: hidden; background: #fffcf7; border-radius: 6px; z-index: 2; box-shadow: 0 2px 10px rgba(0,0,0,0.3); padding: 25px 20px; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, z-index 0s 0.4s; text-align: left; }
+        .letter::before { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid rgba(211, 89, 179, 0.4); border-radius: 4px; pointer-events: none; z-index: 10; }
+        .letter-title { font-family: 'Playfair Display', serif; color: #d359b3; font-size: clamp(1.2rem, 5vw, 1.5rem); margin-bottom: 10px; }
+        .letter-body { font-family: 'Poppins', sans-serif; color: #4a4a4a; font-size: clamp(0.75rem, 3.5vw, 0.85rem); line-height: 1.6; font-weight: 500; }
 
-        .envelope-container.open .envelope { transform: translateY(80px); }
+        .envelope-container.open .envelope { transform: translateY(60px); }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .wax-seal { opacity: 0; }
-        .envelope-container.open .letter { transform: translateY(-50px); max-height: 65vh; overflow-y: auto; z-index: 5; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-        .letter::-webkit-scrollbar { width: 5px; } 
-        .letter::-webkit-scrollbar-thumb { background: rgba(217, 70, 239, 0.5); border-radius: 10px; }
+        .envelope-container.open .letter { transform: translateY(-30px); max-height: 60vh; overflow-y: auto; box-shadow: 0 15px 30px rgba(0,0,0,0.2); z-index: 5; }
+        .letter::-webkit-scrollbar { width: 5px; } .letter::-webkit-scrollbar-thumb { background: rgba(211, 89, 179, 0.5); border-radius: 10px; }
+        .envelope-instruction { margin-top: 25px; font-size: 0.85rem; letter-spacing: 2px; color: rgba(255,255,255,0.6); animation: pulse 2s infinite; transition: opacity 0.3s; }
         
-        .instruction-text { margin-top: 30px; font-size: 0.85rem; letter-spacing: 2px; color: var(--text-muted); animation: pulse 2s infinite; text-transform: uppercase; }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        
-        #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 5; opacity: 0; transition: opacity 1s; }
-        #confetti.active { opacity: 1; }
+        .fade-out { opacity: 0 !important; pointer-events: none; }
+        .hidden-element { opacity: 0; pointer-events: none; transition: opacity 1s ease; margin-top: 20px; }
+        .visible-element { opacity: 1; pointer-events: all; }
+        #black-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; opacity: 0; z-index: 999; pointer-events: none; transition: opacity 3s ease-in-out; }
+
+        .ambient-shape { position: absolute; border-radius: 50%; filter: blur(2px); z-index: 1; }
+        .b-1 { top: 10%; left: 10%; width: 25px; height: 35px; background: rgba(211, 89, 179, 0.6); box-shadow: 0 0 20px #d359b3; }
+        .b-2 { top: 25%; left: 22%; width: 20px; height: 30px; background: rgba(144, 77, 217, 0.6); box-shadow: 0 0 20px #904dd9; }
+        .b-3 { top: 40%; left: 34%; width: 22px; height: 32px; background: rgba(211, 89, 179, 0.5); box-shadow: 0 0 20px #d359b3; }
+        .b-4 { top: 75%; left: 58%; width: 25px; height: 35px; background: rgba(144, 77, 217, 0.5); box-shadow: 0 0 20px #904dd9; }
+        .b-5 { top: 90%; left: 75%; width: 30px; height: 40px; background: rgba(211, 89, 179, 0.3); box-shadow: 0 0 20px #d359b3; }
+
+        @media (max-height: 600px) {
+            .cake-container { margin: 10px 0 20px; transform: scale(0.85); }
+            .name { margin-bottom: 5px; }
+            .envelope-container { height: 180px; }
+            .letter { height: 160px; max-height: 160px; padding: 20px 15px; }
+            .envelope-container.open .envelope { transform: translateY(40px); }
+            .envelope-container.open .letter { transform: translateY(-20px); max-height: 50vh; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Background Elements -->
-    <div class="aurora">
-        <div class="aurora-blob blob-1"></div>
-        <div class="aurora-blob blob-2"></div>
-        <div class="aurora-blob blob-3"></div>
-    </div>
-    <div class="stars"></div>
+    <!-- Black Screen Overlay -->
+    <div id="black-overlay"></div>
 
-    <!-- Background Audio -->
-    <audio id="bg-music" loop>
-        <source src="https://www.dropbox.com/scl/fi/gjdnhg2wvtw6f3t4nnv13/WhatsApp-Video-2026-08-19-at-9.09.33-AM.mp4?rlkey=4jwlwfnd5eg319gyambcz9ijf&st=wq9lnrj6&raw=1" type="audio/mp4">
+    <!-- HIDDEN AUDIO PLAYER (Aapki file link) -->
+    <audio id="birthday-music" loop>
+        <source src="https://www.dropbox.com/scl/fi/gjdnhg2wvtw6f3t4nnv13/WhatsApp-Video-2026-08-19-at-9.09.33-AM.mp4?rlkey=4jwlwfnd5eg319gyambcz9ijf&st=wq9lnrj6&raw=1">
     </audio>
 
-    <!-- SCREEN 1: INTRO -->
-    <div id="screen-1" class="screen active">
-        <h2 class="font-playfair" style="font-size: 2.5rem; margin-bottom: 10px;">Hey... 👀</h2>
-        <p class="subtitle">Someone has a little surprise for you...</p>
-        <p class="subtitle" style="color: white; font-weight: 500;">But first... promise me you'll explore everything. 🤫❤️</p>
-        <button class="glow-btn" onclick="nextScreen(1)">OPEN MY SURPRISE ✨</button>
+    <!-- SCREEN 1: THE INTRO -->
+    <div id="screen-1" class="screen">
+        <div class="container">
+            <p class="intro-text-1">Hey… 👀</p>
+            <p class="intro-text-2">Today is your birthday 🎉🥂</p>
+            <p class="intro-text-3">Quickly click below now, it's a surprise. 🤫❤️</p>
+            <button id="open-surprise-btn" class="glow-btn">Click Here ✨</button>
+        </div>
     </div>
 
-    <!-- SCREEN 2: GIFT BOX -->
+    <!-- SCREEN 2: THE CAKE -->
     <div id="screen-2" class="screen">
-        <h2 class="font-playfair" style="font-size: 2rem; margin-bottom: 20px;">This one's specially for you, <span class="dyn-name" style="color: #f472b6;">Shivani</span> 🎁</h2>
-        
-        <div class="gift-container">
-            <div class="gift-bow"></div>
-            <div class="gift-lid"></div>
-            <div class="gift-box"></div>
+        <div class="ambient-shape b-1"></div><div class="ambient-shape b-2"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-4"></div><div class="ambient-shape b-5"></div>
+        <div class="container">
+            <h2 class="happy-birthday">Happiest Birthday</h2>
+            <!-- ID ADDED HERE FOR DYNAMIC NAME -->
+            <h1 class="name" id="cakeName">Friend</h1>
+            <div class="heart">❤️</div>
+            <div class="cake-container">
+                <div class="candles">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
+                <div class="cake-tier-top"></div>
+                <div class="cake-tier-bottom"></div>
+            </div>
+            <button id="make-wish-btn" class="wish-btn">MAKE A WISH 🕯️</button>
         </div>
-
-        <button class="glow-btn" onclick="nextScreen(2)">UNWRAP IT 🎀</button>
     </div>
 
-    <!-- SCREEN 3: CAKE & WISHES -->
+    <!-- SCREEN 3: THE ENVELOPE / CARD -->
     <div id="screen-3" class="screen">
-        <p class="tracking-wide text-muted">Happy Birthday</p>
-        <h1 class="font-playfair name-title dyn-name">Shivani</h1>
-        <div style="color: #ef4444; font-size: 1.5rem; animation: pulse 1.5s infinite;">❤️</div>
+        <div class="ambient-shape b-1"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-5"></div>
         
-        <div class="cake-container">
-            <div class="candles">
-                <div class="candle"><div class="flame"></div></div>
-                <div class="candle" style="height: 38px; margin-bottom: 4px;"><div class="flame"></div></div>
-                <div class="candle"><div class="flame"></div></div>
-            </div>
-            <div class="cake-tier-top"></div>
-            <div class="cake-tier-bottom"></div>
-        </div>
+        <div class="container">
+            <h2 class="happy-birthday" id="env-title" style="margin-bottom: 25px;">A Special Note For You</h2>
+            
+            <div class="envelope-container" id="envelope-btn">
+                <div class="envelope">
+                    <div class="envelope-back"></div>
+                    
+                    <div class="letter">
+                        <!-- ID ADDED HERE FOR DYNAMIC NAME -->
+                        <h3 class="letter-title">Dear <span id="letterName">Friend</span>,</h3>
+                        <!-- ID ADDED HERE FOR DYNAMIC MESSAGE -->
+                        <p class="letter-body" id="letterMsg">
+                            Wishing you the happiest of birthdays! ✨<br><br>
+                            May your day be filled with love, laughter, and everything your heart desires.
+                        </p>
+                    </div>
 
-        <p class="font-script" style="font-size: 1.8rem; color: #fbcfe8; margin-top: 10px;">May this year give you more reasons to smile. ❤️</p>
-        <button class="glow-btn" onclick="nextScreen(3)">MAKE A WISH 🕯️</button>
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap">
+                        <div class="wax-seal"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="envelope-instruction" id="env-instruction">Tap envelope to open 💌</div>
+            <button id="close-letter-btn" class="glow-btn hidden-element">Close Surprise ✨</button>
+        </div>
     </div>
 
-    <!-- SCREEN 4: THE ENVELOPE (LAST) -->
+    <!-- SCREEN 4: THANK YOU MESSAGE -->
     <div id="screen-4" class="screen">
-        <p class="tracking-wide" style="color: #d8b4fe; margin-bottom: 15px;">One Last Thing...</p>
-        <h2 class="font-playfair" style="font-size: 2.2rem;">A Special Note For You 💌</h2>
-        
-        <div class="envelope-container" id="envelope-btn" onclick="openEnvelope()">
-            <div class="envelope">
-                <div class="envelope-back"></div>
-                <div class="letter">
-                    <h3 class="letter-title">Dear <span class="dyn-name">Shivani</span>,</h3>
-                    <p class="letter-body" id="dynamic-message">
-                        Wishing you the happiest of birthdays! ✨<br><br>
-                        May your day be filled with love, laughter, and everything your beautiful heart desires. Never stop smiling.
-                    </p>
-                </div>
-                <div class="envelope-front"></div>
-                <div class="envelope-flap">
-                    <div class="wax-seal"></div>
-                </div>
-            </div>
+        <div class="container">
+            <h1 class="name" style="font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 20px;">Thank You ❤️</h1>
+            <p class="intro-text-2">For taking the time to see this small surprise.</p>
+            <p class="intro-text-2">Once again, wishing you a very Happy Birthday!</p>
         </div>
-        
-        <p class="instruction-text" id="env-instruction">Tap the envelope to open</p>
     </div>
 
-    <!-- Javascript Logic -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Extract Data from URL (Your original logic kept intact)
+        // Data Extract from URL
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const dataParam = urlParams.get('d');
             
             if (dataParam) {
                 try {
+                    // Decode base64 and parse JSON
                     const decoded = JSON.parse(decodeURIComponent(escape(atob(dataParam))));
+                    
+                    // Replace placeholders with real data
                     if(decoded.n) {
-                        document.querySelectorAll('.dyn-name').forEach(el => el.innerText = decoded.n);
+                        document.getElementById('cakeName').innerText = decoded.n;
+                        document.getElementById('letterName').innerText = decoded.n;
                     }
                     if(decoded.m) {
-                        document.getElementById('dynamic-message').innerHTML = decoded.m.replace(/\n/g, '<br>');
+                        // Replace newlines with <br> tags for correct formatting
+                        document.getElementById('letterMsg').innerHTML = decoded.m.replace(/\n/g, '<br>');
                     }
                 } catch(e) {
                     console.log("Error decoding link data:", e);
@@ -258,38 +208,64 @@
             }
         };
 
-        // Screen Navigation Logic
-        function nextScreen(currentScreenIndex) {
-            // Play audio on first interaction
-            if(currentScreenIndex === 1) {
-                document.getElementById('bg-music').play().catch(e => console.log("Audio play blocked", e));
-            }
+        // Screen transitions & animations
+        document.getElementById('open-surprise-btn').addEventListener('click', function() {
+            const screen1 = document.getElementById('screen-1');
+            screen1.classList.add('hidden');
+            
+            const bgMusic = document.getElementById('birthday-music');
+            bgMusic.play().catch(error => console.log("Audio issue", error));
+            
+            setTimeout(() => {
+                screen1.style.display = 'none';
+                const screen2 = document.getElementById('screen-2');
+                screen2.classList.add('visible');
+            }, 800);
+        });
 
-            const current = document.getElementById(`screen-${currentScreenIndex}`);
-            const next = document.getElementById(`screen-${currentScreenIndex + 1}`);
+        document.getElementById('make-wish-btn').addEventListener('click', function() {
+            const screen2 = document.getElementById('screen-2');
+            screen2.classList.remove('visible');
+            screen2.classList.add('hidden');
+            
+            setTimeout(() => {
+                screen2.style.display = 'none';
+                const screen3 = document.getElementById('screen-3');
+                screen3.classList.add('visible');
+            }, 800);
+        });
 
-            current.classList.remove('active');
-            current.classList.add('hidden');
+        document.getElementById('envelope-btn').addEventListener('click', function() {
+            if(this.classList.contains('open')) return;
+            
+            this.classList.add('open');
+            document.getElementById('env-title').classList.add('fade-out');
+            document.getElementById('env-instruction').classList.add('fade-out');
 
             setTimeout(() => {
-                current.style.display = 'none';
-                if(next) {
-                    next.style.display = 'flex';
-                    // Trigger reflow
-                    void next.offsetWidth;
-                    next.classList.add('active');
-                }
-            }, 800);
-        }
+                const closeBtn = document.getElementById('close-letter-btn');
+                closeBtn.classList.remove('hidden-element');
+                closeBtn.classList.add('visible-element');
+            }, 2000);
+        });
 
-        // Envelope Open Logic
-        function openEnvelope() {
-            const env = document.getElementById('envelope-btn');
-            if(!env.classList.contains('open')) {
-                env.classList.add('open');
-                document.getElementById('env-instruction').style.opacity = '0';
-            }
-        }
+        document.getElementById('close-letter-btn').addEventListener('click', function() {
+            const screen3 = document.getElementById('screen-3');
+            screen3.classList.remove('visible');
+            screen3.classList.add('hidden');
+            
+            setTimeout(() => {
+                screen3.style.display = 'none';
+                const screen4 = document.getElementById('screen-4');
+                screen4.classList.add('visible');
+
+                setTimeout(() => {
+                    document.getElementById('black-overlay').style.opacity = '1';
+                }, 4000);
+
+            }, 800);
+        });
     </script>
+
 </body>
 </html>
