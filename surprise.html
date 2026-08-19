@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700&family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ----- ALL STYLES (Same as before, with one addition for expired page) ----- */
         :root {
             --bg-dark: #1b0a1d;
             --bg-light: #2d1433;
@@ -141,68 +142,193 @@
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- SCREEN 1: THE INTRO -->
-    <div id="screen-1" class="screen">
-        <div class="container">
-            <p class="intro-text-1">Hey… 👀</p>
-            <p class="intro-text-2">Today is your birthday 🎉🥂</p>
-            <p class="intro-text-3">Quickly click below now, it's a surprise. 🤫❤️</p>
-            <button id="open-surprise-btn" class="glow-btn">Click Here ✨</button>
-        </div>
-    </div>
-
-    <!-- SCREEN 2: THE CAKE -->
-    <div id="screen-2" class="screen">
-        <div class="ambient-shape b-1"></div><div class="ambient-shape b-2"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-4"></div><div class="ambient-shape b-5"></div>
-        <div class="container">
-            <h2 class="happy-birthday">Happiest Birthday</h2>
-            <h1 class="name" id="cakeName">Friend</h1>
-            <div class="heart">❤️</div>
-            <div class="cake-container">
-                <div class="candles">
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                </div>
-                <div class="cake-tier-top"></div>
-                <div class="cake-tier-bottom"></div>
+    <!-- ******************************************************* -->
+    <!-- 🔥 MAIN LOGIC: EXPIRY CHECK + SURPRISE CONTENT -->
+    <!-- ******************************************************* -->
+    <div id="main-content" style="display: none;">
+        <!-- SCREEN 1: INTRO -->
+        <div id="screen-1" class="screen">
+            <div class="container">
+                <p class="intro-text-1">Hey… 👀</p>
+                <p class="intro-text-2">Today is your birthday 🎉🥂</p>
+                <p class="intro-text-3">Quickly click below now, it's a surprise. 🤫❤️</p>
+                <button id="open-surprise-btn" class="glow-btn">Click Here ✨</button>
             </div>
-            <button id="make-wish-btn" class="wish-btn">MAKE A WISH 🕯️</button>
+        </div>
+
+        <!-- SCREEN 2: CAKE -->
+        <div id="screen-2" class="screen">
+            <div class="ambient-shape b-1"></div><div class="ambient-shape b-2"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-4"></div><div class="ambient-shape b-5"></div>
+            <div class="container">
+                <h2 class="happy-birthday">Happiest Birthday</h2>
+                <h1 class="name" id="cakeName">Friend</h1>
+                <div class="heart">❤️</div>
+                <div class="cake-container">
+                    <div class="candles">
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                    </div>
+                    <div class="cake-tier-top"></div>
+                    <div class="cake-tier-bottom"></div>
+                </div>
+                <button id="make-wish-btn" class="wish-btn">MAKE A WISH 🕯️</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: ENVELOPE -->
+        <div id="screen-3" class="screen">
+            <div class="ambient-shape b-1"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-5"></div>
+            <div class="container">
+                <h2 class="happy-birthday" id="env-title" style="margin-bottom: 25px;">A Special Note For You</h2>
+                <div class="envelope-container" id="envelope-btn">
+                    <div class="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="letter">
+                            <h3 class="letter-title">Dear <span id="letterName">Friend</span>,</h3>
+                            <p class="letter-body" id="letterMsg">
+                                Wishing you the happiest of birthdays! ✨<br><br>
+                                May your day be filled with love, laughter, and everything your heart desires.
+                            </p>
+                        </div>
+                        <div class="envelope-front"></div>
+                        <div class="envelope-flap">
+                            <div class="wax-seal"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="envelope-instruction" id="env-instruction">Tap envelope to open 💌</div>
+                <button id="close-letter-btn" class="glow-btn hidden-element">Close Surprise ✨</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: THANK YOU -->
+        <div id="screen-4" class="screen">
+            <div class="container">
+                <h1 class="name" style="font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 20px;">Thank You ❤️</h1>
+                <p class="intro-text-2">For taking the time to see this small surprise.</p>
+                <p class="intro-text-2">Once again, wishing you a very Happy Birthday!</p>
+            </div>
         </div>
     </div>
 
-    <!-- SCREEN 3: THE ENVELOPE / CARD -->
-    <div id="screen-3" class="screen">
-        <div class="ambient-shape b-1"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-5"></div>
-        
-        <div class="container">
-            <h2 class="happy-birthday" id="env-title" style="margin-bottom: 25px;">A Special Note For You</h2>
+    <!-- ******************************************************* -->
+    <!-- JAVASCRIPT: EXPIRY CHECK + ANIMATIONS -->
+    <!-- ******************************************************* -->
+    <script>
+        (function() {
+            // ----- STEP 1: Check if link is expired -----
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('d');
             
-            <div class="envelope-container" id="envelope-btn">
-                <div class="envelope">
-                    <div class="envelope-back"></div>
+            let isValid = false;
+            let decodedData = null;
+
+            if (dataParam) {
+                try {
+                    // Decode the data
+                    const jsonStr = decodeURIComponent(escape(atob(dataParam)));
+                    decodedData = JSON.parse(jsonStr);
                     
-                    <div class="letter">
-                        <h3 class="letter-title">Dear <span id="letterName">Friend</span>,</h3>
-                        <p class="letter-body" id="letterMsg">
-                            Wishing you the happiest of birthdays! ✨<br><br>
-                            May your day be filled with love, laughter, and everything your heart desires.
-                        </p>
-                    </div>
+                    // 🔥 CRITICAL: Check if this link ID exists in localStorage
+                    const activeLinks = JSON.parse(localStorage.getItem('birthdayLinks')) || [];
+                    const linkExists = activeLinks.some(link => link.id === decodedData.id);
+                    
+                    if (linkExists) {
+                        isValid = true;
+                    } else {
+                        console.log('Link expired: ID not found in localStorage');
+                    }
+                } catch(e) {
+                    console.log('Error decoding link data:', e);
+                }
+            }
 
-                    <div class="envelope-front"></div>
-                    <div class="envelope-flap">
-                        <div class="wax-seal"></div>
+            // ----- STEP 2: If expired, show expired page -----
+            if (!isValid || !decodedData) {
+                document.body.innerHTML = `
+                    <div class="expired-page">
+                        <div class="emoji-big">🔗</div>
+                        <h1>Link Expired</h1>
+                        <p>This birthday wish link has been deleted or does not exist anymore.</p>
+                        <p class="sub-text">💝 Contact the sender for a new link!</p>
                     </div>
-                </div>
-            </div>
-            
-            <div class="envelope-instruction" id="env-instruction">Tap envelope to open 💌</div>
-            <button id="close-letter-btn" class="glow-btn hidden-element">Close Surprise ✨</button>
-        </div>
-    </div>
+                `;
+                return; // Stop execution - no surprise content will load
+            }
 
-    <!-- SCREEN 4: THANK YOU MESSAGE -->
-    <div id="screen-4" class="screen">
-        <div class="container">
-            <h1 class="name" style="font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 20px;">Thank You
+            // ----- STEP 3: Link is valid - show the surprise -----
+            document.getElementById('main-content').style.display = 'block';
+
+            // Fill dynamic data
+            if(decodedData.n) {
+                document.getElementById('cakeName').innerText = decodedData.n;
+                document.getElementById('letterName').innerText = decodedData.n;
+            }
+            if(decodedData.m) {
+                document.getElementById('letterMsg').innerHTML = decodedData.m.replace(/\n/g, '<br>');
+            }
+
+            // ----- STEP 4: Screen Transitions & Animations (same as before) -----
+            document.getElementById('open-surprise-btn').addEventListener('click', function() {
+                const screen1 = document.getElementById('screen-1');
+                screen1.classList.add('hidden');
+                
+                const bgMusic = document.getElementById('birthday-music');
+                bgMusic.play().catch(error => console.log("Audio issue", error));
+                
+                setTimeout(() => {
+                    screen1.style.display = 'none';
+                    const screen2 = document.getElementById('screen-2');
+                    screen2.classList.add('visible');
+                }, 800);
+            });
+
+            document.getElementById('make-wish-btn').addEventListener('click', function() {
+                const screen2 = document.getElementById('screen-2');
+                screen2.classList.remove('visible');
+                screen2.classList.add('hidden');
+                
+                setTimeout(() => {
+                    screen2.style.display = 'none';
+                    const screen3 = document.getElementById('screen-3');
+                    screen3.classList.add('visible');
+                }, 800);
+            });
+
+            document.getElementById('envelope-btn').addEventListener('click', function() {
+                if(this.classList.contains('open')) return;
+                
+                this.classList.add('open');
+                document.getElementById('env-title').classList.add('fade-out');
+                document.getElementById('env-instruction').classList.add('fade-out');
+
+                setTimeout(() => {
+                    const closeBtn = document.getElementById('close-letter-btn');
+                    closeBtn.classList.remove('hidden-element');
+                    closeBtn.classList.add('visible-element');
+                }, 2000);
+            });
+
+            document.getElementById('close-letter-btn').addEventListener('click', function() {
+                const screen3 = document.getElementById('screen-3');
+                screen3.classList.remove('visible');
+                screen3.classList.add('hidden');
+                
+                setTimeout(() => {
+                    screen3.style.display = 'none';
+                    const screen4 = document.getElementById('screen-4');
+                    screen4.classList.add('visible');
+
+                    setTimeout(() => {
+                        document.getElementById('black-overlay').style.opacity = '1';
+                    }, 4000);
+
+                }, 800);
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
