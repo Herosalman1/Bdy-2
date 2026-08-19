@@ -6,6 +6,7 @@
     <title>Birthday Link Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Tumhara CSS yahi rahega - same as before */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #1b0a1d; color: white; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 20px; }
         .container { background: #2d1433; padding: 30px; border-radius: 15px; width: 100%; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 20px; }
@@ -66,6 +67,7 @@
     </div>
 
     <script>
+        // ----- LOCAL STORAGE SETUP -----
         let links = JSON.parse(localStorage.getItem('birthdayLinks')) || [];
         let totalCreated = parseInt(localStorage.getItem('totalCreated')) || 0;
 
@@ -75,6 +77,7 @@
             renderLinks();
         }
 
+        // ----- GENERATE LINK -----
         function generateLink() {
             const name = document.getElementById('friendName').value.trim();
             const msg = document.getElementById('customMessage').value.trim();
@@ -84,11 +87,11 @@
                 return;
             }
 
-            // Generate unique ID for this link
+            // 🔥 IMPORTANT: Har link ka unique ID
             const linkId = Date.now().toString(36) + Math.random().toString(36).substr(2, 8);
             
             const payload = { 
-                id: linkId,
+                id: linkId,  // ID payload mein bhi save karo
                 n: name, 
                 m: msg 
             };
@@ -101,6 +104,7 @@
             
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
             
+            // LocalStorage mein save karo
             const linkData = {
                 id: linkId,
                 name: name,
@@ -134,6 +138,7 @@
             });
         }
 
+        // ----- DELETE SYSTEM -----
         function deleteLink(id) {
             if(confirm('🗑️ Delete this link? Link will become DEAD.')) {
                 links = links.filter(link => link.id !== id);
