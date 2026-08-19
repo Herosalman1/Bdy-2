@@ -251,9 +251,8 @@
             max-height: 170px;
             overflow: hidden;
             
-            /* ✅ LEFT BORDER ADD KAR DIYA HAI (PINK COLOR) */
+            /* ✅ LEFT BORDER (PINK) */
             border-left: 4px solid #d359b3;
-            
         }
         .letter-content .letter-title {
             font-family: 'Playfair Display', serif;
@@ -434,7 +433,7 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 4 (Envelope) - BORDER ADDED ===== -->
+    <!-- ===== SCREEN 4 (Envelope) - BORDER ADDED & CONNECTED ===== -->
     <div id="screen-4" class="screen">
         <div class="container flex flex-col items-center text-center max-w-md mx-auto">
             <h2 class="font-display text-foreground mb-5 transition-opacity duration-300" id="env-title" style="font-size: 1.5rem;">♡ ᴀ sᴘᴇᴄɪᴀʟ ɴᴏᴛᴇ ꜰᴏʀ ʏᴏᴜ ♡</h2>
@@ -444,6 +443,7 @@
                     <div class="envelope-back"></div>
                     <div class="letter-content">
                         <h3 class="letter-title" id="letter-title" style="font-size: 1.1rem;">Dear Friend,</h3>
+                        <!-- ID="letter-body" se data yahan aayega index.html se -->
                         <p class="letter-body" id="letter-body" style="font-size: 0.7rem;">
                             Wishing you a very Happy Birthday! 🎉<br />
                             May your day be filled with lots of love, joy,<br />
@@ -550,7 +550,7 @@
         })();
     </script>
 
-    <!-- ===== DATA FETCHER ===== -->
+    <!-- ===== DATA FETCHER (RECEIVER SCRIPT) ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
