@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Birthday Surprise ✨</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Shivani 🎂</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -17,6 +16,8 @@
                         accent: '#904dd9',
                         secondary: '#2d1433',
                         rose: '#ff3366',
+                        gold: '#facc15',
+                        violet: '#8b5cf6',
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
@@ -26,18 +27,19 @@
             }
         }
     </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Canvas Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js">
+    </script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background-color: #0b0410;
+            background: #0b0410;
             color: white;
             font-family: 'Poppins', sans-serif;
             height: 100vh;
@@ -46,64 +48,112 @@
             position: relative;
         }
 
-        /* Ambient Stars & Grid Overlay */
         body::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: 1;
             pointer-events: none;
         }
 
-        /* 3RD: PARTICLE LAYER */
+        .ambient-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .b-1 {
+            top: 10%;
+            left: 5%;
+            width: 260px;
+            height: 260px;
+            background: #d359b3;
+        }
+        .b-2 {
+            bottom: 15%;
+            right: 5%;
+            width: 280px;
+            height: 280px;
+            background: #904dd9;
+        }
+        .b-3 {
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: #ff3366;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            filter: blur(80px);
+        }
+
         .particle-layer {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 2;
+            overflow: hidden;
         }
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(211, 89, 179, 0.8);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
             animation: floatParticle linear infinite;
+            will-change: transform, opacity;
         }
         @keyframes floatParticle {
-            0% { transform: translateY(0) scale(1); opacity: 0.2; }
-            50% { opacity: 0.8; transform: translateY(-20px) scale(1.2); }
-            100% { transform: translateY(-40px) scale(1); opacity: 0.2; }
+            0% {
+                transform: translateY(0px) scale(0.8);
+                opacity: 0.1;
+            }
+            25% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateY(-30px) scale(1.2);
+            }
+            75% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-60px) scale(0.8);
+                opacity: 0.1;
+            }
         }
 
-        /* Glow Button */
         .glow-btn {
             background: linear-gradient(90deg, #d359b3, #904dd9);
             border: none;
-            padding: 14px 32px;
-            border-radius: 30px;
+            padding: 14px 34px;
+            border-radius: 40px;
             color: white;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(211, 89, 179, 0.5);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 28px rgba(211, 89, 179, 0.4);
+            transition: all 0.25s ease;
             position: relative;
             z-index: 20;
+            letter-spacing: 0.3px;
         }
         .glow-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(211, 89, 179, 0.8);
+            transform: scale(1.04);
+            box-shadow: 0 0 42px rgba(211, 89, 179, 0.7);
         }
-
         .text-gradient {
             background: linear-gradient(90deg, #ff8da1, #c874ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Screen Transitions */
         .screen {
             position: absolute;
             inset: 0;
@@ -113,7 +163,7 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.7s ease;
             z-index: 10;
             padding: 20px;
         }
@@ -122,114 +172,148 @@
             pointer-events: all;
         }
 
-        /* 4TH: ENVELOPE STYLING */
-        .envelope-container {
+        @keyframes flicker {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1) translateX(-50%);
+            }
+            50% {
+                opacity: 0.75;
+                transform: scale(0.92) translateX(-50%) translateY(2px);
+            }
+            25% {
+                transform: scale(1.06) translateX(-50%) rotate(-2deg);
+            }
+            75% {
+                transform: scale(0.94) translateX(-50%) rotate(2deg);
+            }
+        }
+        .flame {
+            animation: flicker 0.45s infinite alternate;
+            box-shadow: 0 0 20px 4px rgba(250, 204, 21, 0.5);
+        }
+
+        /* ===== ENVELOPE - ORIGINAL STYLE ===== */
+        .envelope-wrapper {
             position: relative;
-            width: min(90vw, 320px);
-            height: 210px;
+            width: 320px;
+            height: 220px;
             perspective: 1000px;
             cursor: pointer;
             z-index: 15;
-            margin-top: 10px;
+            margin: 10px auto;
         }
+
         .envelope {
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.6s ease;
+            transition: transform 0.3s ease;
         }
+
         .envelope-back {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #4a1259, #23062d);
-            border-radius: 8px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            background: linear-gradient(145deg, #6b1f7a, #3a0a44);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
+
         .envelope-front {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #711f88, #400c52);
-            clip-path: polygon(0 35%, 50% 65%, 100% 35%, 100% 100%, 0% 100%);
-            border-radius: 8px;
+            background: linear-gradient(145deg, #7d258e, #4a1259);
+            clip-path: polygon(0 38%, 50% 68%, 100% 38%, 100% 100%, 0% 100%);
+            border-radius: 12px;
             z-index: 3;
         }
+
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 65%;
-            background: linear-gradient(135deg, #8a27a6, #53116a);
+            height: 68%;
+            background: linear-gradient(145deg, #8f2aa3, #5a166e);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top center;
             z-index: 4;
-            transition: transform 0.6s ease;
+            transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 12px 12px 0 0;
             display: flex;
             justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 16px;
         }
+
         .wax-seal {
-            position: absolute;
-            bottom: 10px;
-            width: 42px;
-            height: 42px;
-            background: radial-gradient(circle, #ff3b68, #9e0022);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 40% 35%, #ff4d7a, #b3002d);
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 -3px 8px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.3rem;
+            transition: opacity 0.5s ease;
+            position: relative;
+            z-index: 5;
         }
-        .wax-seal::after { content: '❤️'; font-size: 1rem; }
+        .wax-seal::after {
+            content: '❤️';
+            font-size: 1.4rem;
+        }
 
-        .letter {
+        .letter-content {
             position: absolute;
-            bottom: 10px;
-            left: 15px;
-            right: 15px;
-            background: #fffdfa;
-            border-radius: 6px;
+            bottom: 18px;
+            left: 20px;
+            right: 20px;
+            background: #fffdf7;
+            border-radius: 10px;
             z-index: 2;
-            padding: 20px;
+            padding: 22px 20px;
             text-align: left;
-            transition: transform 0.8s ease 0.3s, max-height 0.8s ease 0.3s;
-            max-height: 180px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.8s cubic-bezier(0.34, 1.4, 0.64, 1), max-height 0.8s ease;
+            max-height: 170px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .letter-title {
+        .letter-content .letter-title {
             font-family: 'Playfair Display', serif;
-            color: #904dd9;
+            color: #7d258e;
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-        .letter-body {
-            color: #333;
-            font-size: 0.9rem;
-            line-height: 1.5;
+        .letter-content .letter-body {
+            color: #2d1a33;
+            font-size: 0.92rem;
+            line-height: 1.6;
         }
 
-        /* Envelope Open Animation */
-        .envelope-container.open .envelope-flap {
-            transform: rotateX(180deg);
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(-180deg);
             z-index: 1;
         }
-        .envelope-container.open .wax-seal { opacity: 0; }
-        .envelope-container.open .letter {
-            transform: translateY(-40px);
-            max-height: 280px;
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+        }
+        .envelope-wrapper.open .letter-content {
+            transform: translateY(-55px) scale(1.02);
+            max-height: 320px;
             z-index: 5;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        .envelope-wrapper.open .envelope {
+            transform: scale(1.01);
         }
 
-        .envelope-instruction {
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 1px;
-        }
-
-        /* 5TH: 10-SECOND SLOW FADE TO BLACK OVERLAY */
+        /* ===== BLACK OVERLAY - 5 SECOND FADE ===== */
         #black-overlay {
             position: fixed;
             inset: 0;
@@ -237,104 +321,167 @@
             opacity: 0;
             z-index: 9999;
             pointer-events: none;
-            transition: opacity 10s linear; /* Exact 10 seconds slow transition */
+            transition: opacity 5s ease-in-out;
         }
         #black-overlay.active {
             opacity: 1;
             pointer-events: all;
         }
 
-        .ambient-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.3;
-            z-index: 1;
+        /* ===== SCREEN 5 - THANK YOU ===== */
+        #screen-5 {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 50%, var(--bg-dark) 100%);
+            z-index: 15;
         }
-        .b-1 { top: 15%; left: 20%; width: 120px; height: 120px; background: #d359b3; }
-        .b-3 { top: 60%; right: 20%; width: 150px; height: 150px; background: #904dd9; }
-        .b-5 { bottom: 10%; left: 30%; width: 100px; height: 100px; background: #ff3366; }
+        #screen-5::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        @media (max-width: 480px) {
+            .glow-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            .envelope-wrapper {
+                width: 90vw;
+                height: 200px;
+            }
+            .letter-content {
+                padding: 16px 14px;
+            }
+            .letter-content .letter-title {
+                font-size: 1.1rem;
+            }
+            .letter-content .letter-body {
+                font-size: 0.82rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- 5TH STEP: BLACK OVERLAY (10 SEC FADE) -->
+    <div class="ambient-shape b-1"></div>
+    <div class="ambient-shape b-2"></div>
+    <div class="ambient-shape b-3"></div>
+
     <div id="black-overlay"></div>
 
-    <!-- 3RD: PARTICLE BACKGROUND LAYER -->
+    <!-- PARTICLES -->
     <div class="particle-layer" aria-hidden="true">
-        <span class="particle" style="left: 18.1908%; top: 45.0912%; width: 4.8px; height: 4.8px; animation-duration: 9.2s;"></span>
-        <span class="particle" style="left: 5.34426%; top: 92.6576%; width: 4.6px; height: 4.6px; animation-duration: 14.2s;"></span>
-        <span class="particle" style="left: 96.1626%; top: 22.4494%; width: 3px; height: 3px; animation-duration: 17.5s;"></span>
-        <span class="particle" style="left: 8.82208%; top: 0.884407%; width: 4px; height: 4px; animation-duration: 9.2s;"></span>
-        <span class="particle" style="left: 45.3384%; top: 88.6154%; width: 5.6px; height: 5.6px; animation-duration: 17.5s;"></span>
-        <span class="particle" style="left: 81.7691%; top: 54.0176%; width: 5.5px; height: 5.5px; animation-duration: 12.3s;"></span>
-        <span class="particle" style="left: 68.8509%; top: 62.8911%; width: 3.4px; height: 3.4px; animation-duration: 18.1s;"></span>
-        <span class="particle" style="left: 26.1702%; top: 20.0154%; width: 3.2px; height: 3.2px; animation-duration: 14.4s;"></span>
-        <span class="particle" style="left: 76.5112%; top: 83.5334%; width: 5px; height: 5px; animation-duration: 12.3s;"></span>
-        <span class="particle" style="left: 61.6583%; top: 26.156%; width: 3.3px; height: 3.3px; animation-duration: 12.2s;"></span>
+        <span class="particle" style="left: 8%; top: 20%; width: 4.2px; height: 4.2px; animation-duration: 11s; animation-delay: 0.2s;"></span>
+        <span class="particle" style="left: 85%; top: 10%; width: 5.5px; height: 5.5px; animation-duration: 13s; animation-delay: 0.5s;"></span>
+        <span class="particle" style="left: 45%; top: 70%; width: 3.8px; height: 3.8px; animation-duration: 14s; animation-delay: 0.9s;"></span>
+        <span class="particle" style="left: 22%; top: 5%; width: 4.8px; height: 4.8px; animation-duration: 10s; animation-delay: 0.1s;"></span>
+        <span class="particle" style="left: 68%; top: 50%; width: 3.2px; height: 3.2px; animation-duration: 16s; animation-delay: 0.3s;"></span>
+        <span class="particle" style="left: 92%; top: 75%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: 0.7s;"></span>
+        <span class="particle" style="left: 15%; top: 60%; width: 4px; height: 4px; animation-duration: 9.5s; animation-delay: 1.1s;"></span>
+        <span class="particle" style="left: 55%; top: 15%; width: 3.5px; height: 3.5px; animation-duration: 15s; animation-delay: 0.4s;"></span>
+        <span class="particle" style="left: 35%; top: 40%; width: 4.6px; height: 4.6px; animation-duration: 12.5s; animation-delay: 1.5s;"></span>
+        <span class="particle" style="left: 75%; top: 85%; width: 3.0px; height: 3.0px; animation-duration: 10.8s; animation-delay: 0.8s;"></span>
+        <span class="particle" style="left: 50%; top: 90%; width: 4.4px; height: 4.4px; animation-duration: 13.7s; animation-delay: 1.2s;"></span>
+        <span class="particle" style="left: 10%; top: 45%; width: 3.7px; height: 3.7px; animation-duration: 11.3s; animation-delay: 0.6s;"></span>
+        <span class="particle" style="left: 95%; top: 45%; width: 4.9px; height: 4.9px; animation-duration: 14.5s; animation-delay: 1.8s;"></span>
+        <span class="particle" style="left: 30%; top: 80%; width: 3.3px; height: 3.3px; animation-duration: 12.2s; animation-delay: 0.3s;"></span>
+        <span class="particle" style="left: 60%; top: 30%; width: 5.2px; height: 5.2px; animation-duration: 15.8s; animation-delay: 2.1s;"></span>
     </div>
 
-    <!-- 1ST SCREEN: INTRO (UPDATED WITH NEW TEXT) -->
+    <!-- ===== SCREEN 1 ===== -->
     <div id="screen-1" class="screen active">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-6 text-center">
             <div class="min-h-[9rem] space-y-4">
-                <p class="font-display text-3xl text-foreground">Hey... 👀</p>
+                <p class="font-display text-3xl text-foreground">Hey… 👀</p>
                 <p class="font-sans text-base text-foreground/80 font-medium">Today is your birthday 🎉🥂</p>
                 <p class="font-sans text-base text-foreground/80 font-medium">Quickly click below now, it's a surprise. 🤫❤️</p>
             </div>
             <div>
-                <button type="button" id="btn-screen-1" class="glow-btn" tabindex="0">
-                    <span class="relative z-10">Click Here ✨</span>
+                <button id="btn-screen-1" class="glow-btn">
+                    <span class="relative z-10">Open my surprise ✨</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 2ND SCREEN: GIFT BOX -->
+    <!-- ===== SCREEN 2 (Gift) ===== -->
     <div id="screen-2" class="screen">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
             <p class="font-display text-2xl leading-snug text-foreground">
-                This one's specially for you, <span class="text-gradient" id="giftName">Shivani</span> 🎁
+                This one's specially for you, <br><span class="text-gradient text-3xl font-bold mt-2 inline-block">Shivani</span> 🎁
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
-                    <!-- Gift Box Lid -->
                     <div class="absolute top-8 left-1/2 h-10 w-48 -translate-x-1/2 rounded-xl border border-white/25 bg-gradient-to-b from-primary to-accent shadow-[0_0_50px_-10px_var(--primary)]">
                         <span class="absolute -top-6 left-1/2 h-8 w-8 -translate-x-1/2 rounded-full border-4 border-rose/80"></span>
                         <span class="absolute top-0 left-1/2 h-full w-4 -translate-x-1/2 bg-rose/70"></span>
                     </div>
-                    <!-- Gift Box Base -->
                     <div class="absolute bottom-6 left-1/2 h-32 w-44 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-b from-secondary to-background shadow-[0_20px_60px_-20px_black]">
                         <span class="absolute top-0 left-1/2 h-full w-4 -translate-x-1/2 bg-gradient-to-b from-primary to-accent opacity-90"></span>
                         <span class="absolute top-1/2 left-0 h-3 w-full -translate-y-1/2 bg-gradient-to-r from-primary/70 to-accent/70"></span>
                     </div>
                 </div>
             </div>
-            <button type="button" id="btn-screen-2" class="glow-btn" tabindex="0">
+            <button id="btn-screen-2" class="glow-btn">
                 <span class="relative z-10">Unwrap it 🎀</span>
             </button>
         </div>
     </div>
 
-    <!-- 4TH SCREEN: ENVELOPE / CARD -->
+    <!-- ===== SCREEN 3 (Cake) ===== -->
     <div id="screen-3" class="screen">
-        <div class="ambient-shape b-1"></div>
-        <div class="ambient-shape b-3"></div>
-        <div class="ambient-shape b-5"></div>
+        <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-2 text-center">
+            <p class="font-sans text-sm font-semibold tracking-[0.25em] text-white/90 uppercase mb-1">Happy Birthday</p>
+            <h1 class="font-display text-5xl md:text-6xl text-gradient pb-1 font-bold">Shivani</h1>
+            <div class="text-rose-400 text-xl mt-0 mb-6">❤️</div>
 
-        <div class="container flex flex-col items-center text-center">
-            <h2 class="happy-birthday font-display text-2xl text-foreground mb-6" id="env-title">A Special Note For You</h2>
+            <div class="relative flex flex-col items-center justify-end h-36 w-full mb-8">
+                <div class="flex gap-5 mb-[-6px] z-20">
+                    <div class="relative h-10 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm">
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full"></div>
+                    </div>
+                    <div class="relative h-12 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm -translate-y-3">
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.2s;"></div>
+                    </div>
+                    <div class="relative h-10 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm">
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+                <div class="h-12 w-40 rounded-full bg-[#bd5d9b] z-10 shadow-[0_-2px_18px_rgba(211,89,179,0.4)] border border-white/20 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
+                </div>
+                <div class="h-16 w-48 rounded-full bg-gradient-to-b from-[#6b2c70] to-[#2d1433] -mt-5 z-0 shadow-[0_12px_35px_rgba(0,0,0,0.7)] border border-white/10 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
+                </div>
+            </div>
 
-            <div class="envelope-container" id="envelope-btn">
+            <button id="btn-screen-3" class="glow-btn uppercase text-sm tracking-wider px-8 py-3">
+                <span class="relative z-10">Make a wish 🕯️</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== SCREEN 4 (Envelope) ===== -->
+    <div id="screen-4" class="screen">
+        <div class="container flex flex-col items-center text-center max-w-md mx-auto">
+            <h2 class="font-display text-2xl text-foreground mb-5 transition-opacity duration-300" id="env-title">💌 A Special Note For You</h2>
+
+            <div class="envelope-wrapper" id="envelope-btn">
                 <div class="envelope">
                     <div class="envelope-back"></div>
-
-                    <div class="letter">
-                        <h3 class="letter-title">Dear <span id="letterName">PRIYA</span>,</h3>
-                        <p class="letter-body" id="letterMsg">Wishing you a very Happy Birthday! May your day be filled with lots of love, joy, and wonderful moments. 🎉🎂✨</p>
+                    <div class="letter-content">
+                        <h3 class="letter-title">Dear Shivani,</h3>
+                        <p class="letter-body">
+                            Wishing you a very Happy Birthday! 🎉<br />
+                            May your day be filled with lots of love, joy,<br />
+                            and wonderful moments. 🎂✨❤️
+                        </p>
                     </div>
-
                     <div class="envelope-front"></div>
                     <div class="envelope-flap">
                         <div class="wax-seal"></div>
@@ -342,68 +489,108 @@
                 </div>
             </div>
 
-            <div class="envelope-instruction" id="env-instruction">Tap envelope to open 💌</div>
-            <button id="close-letter-btn" class="glow-btn mt-6 hidden">Close Surprise ✨</button>
+            <div class="mt-5 text-sm text-white/60 tracking-wider transition-opacity duration-300" id="env-instruction">👇 Tap envelope to open</div>
+
+            <button id="close-letter-btn" class="glow-btn mt-6 hidden opacity-0 transition-opacity duration-500">Close Surprise ✨</button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- ===== SCREEN 5 (THANK YOU) ===== -->
+    <div id="screen-5" class="screen">
+        <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-md mx-auto">
+            <h1 class="font-display text-5xl md:text-6xl text-gradient font-bold mb-6">Thank You ❤️</h1>
+            <p class="font-sans text-base text-foreground/80 font-medium">For taking the time to see this small surprise.</p>
+            <p class="font-sans text-base text-foreground/80 font-medium mt-2">Once again, wishing you a very Happy Birthday!</p>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // Confetti Burst Trigger
-        function fireConfetti() {
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 60,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#d359b3', '#904dd9', '#ff3366', '#ffffff']
-                });
+        (function() {
+            function fireConfetti() {
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 90,
+                        spread: 85,
+                        origin: { y: 0.5 },
+                        colors: ['#d359b3', '#904dd9', '#ff3366', '#ffffff', '#facc15', '#ff8da1']
+                    });
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 40,
+                            spread: 50,
+                            origin: { y: 0.4 },
+                            colors: ['#c874ff', '#ff6b8a', '#facc15']
+                        });
+                    }, 120);
+                }
             }
-        }
 
-        // Screen 1 -> Screen 2 Transition
-        document.getElementById('btn-screen-1').addEventListener('click', function() {
-            document.getElementById('screen-1').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('screen-2').classList.add('active');
-                fireConfetti();
-            }, 400);
-        });
-
-        // Screen 2 -> Screen 4 (Envelope) Transition
-        document.getElementById('btn-screen-2').addEventListener('click', function() {
-            document.getElementById('screen-2').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('screen-3').classList.add('active');
-                fireConfetti();
-            }, 400);
-        });
-
-        // Open Envelope Action
-        const envelopeBtn = document.getElementById('envelope-btn');
-        envelopeBtn.addEventListener('click', function() {
-            if (!this.classList.contains('open')) {
-                this.classList.add('open');
-                document.getElementById('env-title').style.opacity = '0.3';
-                document.getElementById('env-instruction').style.opacity = '0';
-                
-                fireConfetti();
-
-                // Show close button after card opens
+            // Screen 1 → 2
+            document.getElementById('btn-screen-1').addEventListener('click', function() {
+                document.getElementById('screen-1').classList.remove('active');
                 setTimeout(() => {
-                    const closeBtn = document.getElementById('close-letter-btn');
-                    closeBtn.classList.remove('hidden');
-                }, 1200);
-            }
-        });
+                    document.getElementById('screen-2').classList.add('active');
+                }, 400);
+            });
 
-        // 5TH STEP: Slow 10-Second Fade to Black Trigger
-        document.getElementById('close-letter-btn').addEventListener('click', function() {
-            const overlay = document.getElementById('black-overlay');
-            
-            // Activate overlay to start 10-second fade animation
-            overlay.classList.add('active');
-        });
+            // Screen 2 → 3 (confetti)
+            document.getElementById('btn-screen-2').addEventListener('click', function() {
+                document.getElementById('screen-2').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('screen-3').classList.add('active');
+                    fireConfetti();
+                }, 400);
+            });
+
+            // Screen 3 → 4 (confetti)
+            document.getElementById('btn-screen-3').addEventListener('click', function() {
+                document.getElementById('screen-3').classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('screen-4').classList.add('active');
+                    fireConfetti();
+                }, 400);
+            });
+
+            // Envelope Open
+            const envelopeWrapper = document.getElementById('envelope-btn');
+            const closeBtn = document.getElementById('close-letter-btn');
+            const envTitle = document.getElementById('env-title');
+            const envInstruction = document.getElementById('env-instruction');
+
+            envelopeWrapper.addEventListener('click', function(e) {
+                if (!this.classList.contains('open')) {
+                    this.classList.add('open');
+                    envTitle.style.opacity = '0.3';
+                    envInstruction.style.opacity = '0';
+
+                    setTimeout(() => {
+                        closeBtn.classList.remove('hidden');
+                        setTimeout(() => {
+                            closeBtn.style.opacity = '1';
+                        }, 50);
+                    }, 1000);
+                }
+            });
+
+            // Close button → Screen 5 (Thank You) → 5 sec → Black Screen
+            closeBtn.addEventListener('click', function() {
+                // Screen 4 hide
+                document.getElementById('screen-4').classList.remove('active');
+                
+                setTimeout(() => {
+                    // Screen 5 (Thank You) show
+                    document.getElementById('screen-5').classList.add('active');
+                    
+                    // 5 seconds baad black screen
+                    setTimeout(() => {
+                        document.getElementById('black-overlay').classList.add('active');
+                    }, 5000);
+                    
+                }, 400);
+            });
+
+        })();
     </script>
 </body>
 </html>
