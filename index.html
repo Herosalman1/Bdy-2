@@ -55,11 +55,15 @@
             
             // --- FIXED URL LOGIC ---
             let baseUrl = window.location.href.split('?')[0];
+            
+            // Agar GitHub Pages ka root URL hai toh 'index.html' replace karna zaroori nahi, par safe rakhne ke liye hai
             if(baseUrl.endsWith('index.html')) {
                 baseUrl = baseUrl.replace('index.html', '');
             }
+            // Make sure there's just one slash
             if(!baseUrl.endsWith('/')) baseUrl += '/';
             
+            // SURPRISE FILE KA NAAM EXACTLY MATCH KARNA ZAROORI HAI
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
             // -----------------------
             
