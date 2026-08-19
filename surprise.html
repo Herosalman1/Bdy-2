@@ -11,7 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #1b0a1d; color: white; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; overflow: hidden; position: relative; }
 
-        /* EXPIRED PAGE */
         .expired-page {
             display: flex;
             flex-direction: column;
@@ -44,7 +43,6 @@
             margin-top: 20px;
         }
 
-        /* NORMAL SURPRISE STYLES */
         .screen { height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; transition: opacity 1s ease-in-out, transform 1s ease-in-out; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         #screen-1 { background: radial-gradient(circle at center, #2d1433 0%, #110613 100%); z-index: 100; }
         #screen-1.hidden { opacity: 0; transform: scale(1.1); pointer-events: none; }
@@ -119,7 +117,7 @@
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- MAIN SURPRISE CONTENT (Hidden initially) -->
+    <!-- MAIN SURPRISE CONTENT -->
     <div id="main-content" style="display: none;">
         <div id="screen-1" class="screen">
             <div class="container">
@@ -185,7 +183,6 @@
 
     <script>
         (function() {
-            // ----- CHECK IF LINK IS EXPIRED -----
             const urlParams = new URLSearchParams(window.location.search);
             const dataParam = urlParams.get('d');
             
@@ -197,21 +194,30 @@
                     const jsonStr = decodeURIComponent(escape(atob(dataParam)));
                     decodedData = JSON.parse(jsonStr);
                     
-                    // Check if this link ID exists in localStorage
+                    // 🔥 CHECK IF LINK EXISTS IN LOCALSTORAGE
                     const activeLinks = JSON.parse(localStorage.getItem('birthdayLinks')) || [];
-                    const linkExists = activeLinks.some(link => link.id === decodedData.id);
                     
-                    if (linkExists) {
+                    // Agar purana link hai (without ID) toh allow karo
+                    if (!decodedData.id) {
+                        // Purane links ko allow karo (backward compatibility)
                         isValid = true;
+                        console.log('🟡 Old link (without ID) - allowing access');
                     } else {
-                        console.log('🔴 Link Expired: ID not found');
+                        // Naye links - ID check karo
+                        const linkExists = activeLinks.some(link => link.id === decodedData.id);
+                        if (linkExists) {
+                            isValid = true;
+                            console.log('✅ Link is valid');
+                        } else {
+                            console.log('🔴 Link Expired: ID not found');
+                        }
                     }
                 } catch(e) {
                     console.log('Error decoding:', e);
                 }
             }
 
-            // ----- IF EXPIRED - SHOW EXPIRED PAGE -----
+            // Agar expired ho toh expired page dikhao
             if (!isValid || !decodedData) {
                 document.body.innerHTML = `
                     <div class="expired-page">
@@ -224,10 +230,9 @@
                 return;
             }
 
-            // ----- LINK IS VALID - SHOW SURPRISE -----
+            // Link valid hai - surprise dikhao
             document.getElementById('main-content').style.display = 'block';
 
-            // Fill dynamic data
             if(decodedData.n) {
                 document.getElementById('cakeName').innerText = decodedData.n;
                 document.getElementById('letterName').innerText = decodedData.n;
@@ -236,7 +241,7 @@
                 document.getElementById('letterMsg').innerHTML = decodedData.m.replace(/\n/g, '<br>');
             }
 
-            // ----- SCREEN TRANSITIONS -----
+            // Screen transitions
             document.getElementById('open-surprise-btn').addEventListener('click', function() {
                 const screen1 = document.getElementById('screen-1');
                 screen1.classList.add('hidden');
