@@ -28,7 +28,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -207,7 +207,8 @@
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
             <p class="font-display leading-snug text-foreground" style="font-size: 2rem;">
                 This one's specially for you, <br>
-                <span class="text-gradient font-bold mt-2 inline-block" id="screen2-name" style="font-size: 2rem;"></span> 🎁
+                <!-- ADDED font-sans, tracking-wider AND drop-shadow for PREMIUM look -->
+                <span class="font-sans text-gradient font-extrabold mt-2 inline-block tracking-wider drop-shadow-md" id="screen2-name" style="font-size: 2.2rem;"></span> 🎁
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
@@ -231,11 +232,13 @@
     <div id="screen-3" class="screen">
         <div class="relative z-10 flex w-full max-w-lg flex-col items-center gap-5 text-center sm:gap-8">
             
-            <h1 class="font-poppins text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; transform: none; max-width: 100vw; filter: blur(0px); letter-spacing: 0.18em;">
+            <!-- FIXED font-poppins to font-sans -->
+            <h1 class="font-sans text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; transform: none; max-width: 100vw; filter: blur(0px); letter-spacing: 0.18em;">
                 Happy Birthday
             </h1>
             
-            <p class="font-display text-[clamp(2.5rem,9vw,3rem)] leading-none text-gradient whitespace-nowrap" style="opacity: 1; transform: none; max-width: 100vw;" id="screen3-name"></p>
+            <!-- CHANGED to font-sans and ADDED tracking-wide for PREMIUM look -->
+            <p class="font-sans font-bold text-[clamp(2.2rem,8vw,3rem)] leading-none text-gradient whitespace-nowrap tracking-wide drop-shadow-lg" style="opacity: 1; transform: none; max-width: 100vw;" id="screen3-name"></p>
             
             <span class="-mt-2 text-4xl drop-shadow-lg" style="transform: none;">❤️</span>
             
@@ -370,7 +373,6 @@
 
             if (encodedData) {
                 try {
-                    // FIX: Reverting spaces back to plus signs if URL stripped them
                     encodedData = encodedData.replace(/ /g, '+');
                     const jsonString = decodeURIComponent(escape(atob(encodedData)));
                     const data = JSON.parse(jsonString);
