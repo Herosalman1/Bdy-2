@@ -250,7 +250,10 @@
             transition: transform 0.8s cubic-bezier(0.34, 1.4, 0.64, 1), max-height 0.8s ease;
             max-height: 170px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            /* ✅ LEFT BORDER ADD KAR DIYA HAI (PINK COLOR) */
+            border-left: 4px solid #d359b3;
+            
         }
         .letter-content .letter-title {
             font-family: 'Playfair Display', serif;
@@ -368,9 +371,9 @@
     <!-- ===== SCREEN 2 (Gift) ===== -->
     <div id="screen-2" class="screen">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
-            <p class="font-display leading-snug text-foreground" style="font-size: 1.5rem;">
+            <p class="font-display leading-snug text-foreground" style="font-size: 2rem;">
                 This one's specially for you, <br>
-                <span class="text-gradient font-bold mt-2 inline-block" id="screen2-name" style="font-size: 2.25rem;">Friend</span> 🎁
+                <span class="text-gradient font-bold mt-2 inline-block" id="screen2-name" style="font-size: 2rem;">PRIYA KUMARI</span> 🎁
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
@@ -394,11 +397,11 @@
     <div id="screen-3" class="screen">
         <div class="relative z-10 flex w-full max-w-lg flex-col items-center gap-5 text-center sm:gap-8">
             
-            <h1 class="font-poppins text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; filter: blur(0px); letter-spacing: 0.18em;">
+            <h1 class="font-poppins text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; transform: none; max-width: 100vw;" filter: blur(0px); letter-spacing: 0.18em;">
                 Happy Birthday
             </h1>
             
-            <p class="font-display text-[clamp(3rem,12vw,5.5rem)] leading-none text-gradient" style="opacity: 1; transform: none;" id="screen3-name">Friend</p>
+            <p class="font-display text-[clamp(2.5rem,9vw,3rem)] leading-none text-gradient whitespace-nowrap" style="opacity: 1; transform: none; max-width: 100vw;" id="screen3-name">PRIYA KUMARI</p>
             
             <span class="-mt-2 text-4xl drop-shadow-lg" style="transform: none;">❤️</span>
             
@@ -431,7 +434,7 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 4 (Envelope) - FONT SIZE REDUCED ===== -->
+    <!-- ===== SCREEN 4 (Envelope) - BORDER ADDED ===== -->
     <div id="screen-4" class="screen">
         <div class="container flex flex-col items-center text-center max-w-md mx-auto">
             <h2 class="font-display text-foreground mb-5 transition-opacity duration-300" id="env-title" style="font-size: 1.5rem;">♡ ᴀ sᴘᴇᴄɪᴀʟ ɴᴏᴛᴇ ꜰᴏʀ ʏᴏᴜ ♡</h2>
@@ -441,7 +444,6 @@
                     <div class="envelope-back"></div>
                     <div class="letter-content">
                         <h3 class="letter-title" id="letter-title" style="font-size: 1.1rem;">Dear Friend,</h3>
-                        <!-- SIZE 0.8rem KAR DIYA HAI -->
                         <p class="letter-body" id="letter-body" style="font-size: 0.7rem;">
                             Wishing you a very Happy Birthday! 🎉<br />
                             May your day be filled with lots of love, joy,<br />
