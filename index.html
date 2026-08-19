@@ -50,20 +50,18 @@
             }
 
             const payload = { n: name, m: msg };
-            const encodedData = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+            // FIX: Added encodeURIComponent to prevent URL from breaking Base64 '+' symbols
+            const base64Data = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+            const encodedData = encodeURIComponent(base64Data);
             
-            /* ===== GITHUB PAGES KA EXACT URL SYSTEM ===== */
             let baseUrl = window.location.href.split('?')[0];
             
-            // Agar URL ke end mein index.html hai toh hatao
             if(baseUrl.endsWith('index.html')) {
                 baseUrl = baseUrl.replace('index.html', '');
             }
             
-            // Ensure karo ki ek hi slash ho
             if(!baseUrl.endsWith('/')) baseUrl += '/';
             
-            // Surprise file ko call karo
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
             
             document.getElementById('generatedUrl').innerText = finalLink;
