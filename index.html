@@ -49,16 +49,21 @@
                 return;
             }
 
-            // Data ko JSON banakar Base64 encode karna (emojis support ke sath)
+            // Data ko JSON banakar Base64 encode karna
             const payload = { n: name, m: msg };
             const encodedData = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
             
-            // Current URL se index.html hatakar surprise.html lagana
+            // --- FIXED URL LOGIC ---
             let baseUrl = window.location.href.split('?')[0];
-            baseUrl = baseUrl.replace('index.html', '');
+            // Agar URL ke end mein index.html hai toh hatao
+            if(baseUrl.endsWith('index.html')) {
+                baseUrl = baseUrl.replace('index.html', '');
+            }
+            // Ensure karo ki ek hi slash ho
             if(!baseUrl.endsWith('/')) baseUrl += '/';
             
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
+            // -----------------------
             
             document.getElementById('generatedUrl').innerText = finalLink;
             document.getElementById('resultBox').style.display = 'block';
