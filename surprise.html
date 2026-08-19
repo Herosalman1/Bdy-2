@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday, Shivani 🎂</title>
+    <title>Happy Birthday 🎂</title>
     <script src="https://cdn.tailwindcss.com">
     </script>
     <script>
@@ -194,7 +194,6 @@
             box-shadow: 0 0 20px 4px rgba(250, 204, 21, 0.5);
         }
 
-        /* ===== ENVELOPE - ORIGINAL STYLE ===== */
         .envelope-wrapper {
             position: relative;
             width: 320px;
@@ -313,7 +312,6 @@
             transform: scale(1.01);
         }
 
-        /* ===== BLACK OVERLAY - 5 SECOND FADE ===== */
         #black-overlay {
             position: fixed;
             inset: 0;
@@ -328,9 +326,8 @@
             pointer-events: all;
         }
 
-        /* ===== SCREEN 5 - THANK YOU ===== */
         #screen-5 {
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 50%, var(--bg-dark) 100%);
+            background: linear-gradient(135deg, #0b0410 0%, #2d1433 50%, #0b0410 100%);
             z-index: 15;
         }
         #screen-5::before {
@@ -374,7 +371,6 @@
 
     <div id="black-overlay"></div>
 
-    <!-- PARTICLES -->
     <div class="particle-layer" aria-hidden="true">
         <span class="particle" style="left: 8%; top: 20%; width: 4.2px; height: 4.2px; animation-duration: 11s; animation-delay: 0.2s;"></span>
         <span class="particle" style="left: 85%; top: 10%; width: 5.5px; height: 5.5px; animation-duration: 13s; animation-delay: 0.5s;"></span>
@@ -393,7 +389,7 @@
         <span class="particle" style="left: 60%; top: 30%; width: 5.2px; height: 5.2px; animation-duration: 15.8s; animation-delay: 2.1s;"></span>
     </div>
 
-    <!-- ===== SCREEN 1 ===== -->
+    <!-- SCREEN 1 -->
     <div id="screen-1" class="screen active">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-6 text-center">
             <div class="min-h-[9rem] space-y-4">
@@ -409,11 +405,11 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 2 (Gift) ===== -->
+    <!-- SCREEN 2 (Gift) -->
     <div id="screen-2" class="screen">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
             <p class="font-display text-2xl leading-snug text-foreground">
-                This one's specially for you, <br><span class="text-gradient text-3xl font-bold mt-2 inline-block">Shivani</span> 🎁
+                This one's specially for you, <br><span class="text-gradient text-3xl font-bold mt-2 inline-block" id="screen2-name">Friend</span> 🎁
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
@@ -433,11 +429,11 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 3 (Cake) ===== -->
+    <!-- SCREEN 3 (Cake) -->
     <div id="screen-3" class="screen">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-2 text-center">
             <p class="font-sans text-sm font-semibold tracking-[0.25em] text-white/90 uppercase mb-1">Happy Birthday</p>
-            <h1 class="font-display text-5xl md:text-6xl text-gradient pb-1 font-bold">Shivani</h1>
+            <h1 class="font-display text-5xl md:text-6xl text-gradient pb-1 font-bold" id="screen3-name">Friend</h1>
             <div class="text-rose-400 text-xl mt-0 mb-6">❤️</div>
 
             <div class="relative flex flex-col items-center justify-end h-36 w-full mb-8">
@@ -466,7 +462,7 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 4 (Envelope) ===== -->
+    <!-- SCREEN 4 (Envelope) -->
     <div id="screen-4" class="screen">
         <div class="container flex flex-col items-center text-center max-w-md mx-auto">
             <h2 class="font-display text-2xl text-foreground mb-5 transition-opacity duration-300" id="env-title">💌 A Special Note For You</h2>
@@ -475,8 +471,8 @@
                 <div class="envelope">
                     <div class="envelope-back"></div>
                     <div class="letter-content">
-                        <h3 class="letter-title">Dear Shivani,</h3>
-                        <p class="letter-body">
+                        <h3 class="letter-title" id="letter-title">Dear Friend,</h3>
+                        <p class="letter-body" id="letter-body">
                             Wishing you a very Happy Birthday! 🎉<br />
                             May your day be filled with lots of love, joy,<br />
                             and wonderful moments. 🎂✨❤️
@@ -495,7 +491,7 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 5 (THANK YOU) ===== -->
+    <!-- SCREEN 5 (THANK YOU) -->
     <div id="screen-5" class="screen">
         <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-md mx-auto">
             <h1 class="font-display text-5xl md:text-6xl text-gradient font-bold mb-6">Thank You ❤️</h1>
@@ -526,7 +522,7 @@
                 }
             }
 
-            // Screen 1 → 2
+            // Screen transitions
             document.getElementById('btn-screen-1').addEventListener('click', function() {
                 document.getElementById('screen-1').classList.remove('active');
                 setTimeout(() => {
@@ -534,7 +530,6 @@
                 }, 400);
             });
 
-            // Screen 2 → 3 (confetti)
             document.getElementById('btn-screen-2').addEventListener('click', function() {
                 document.getElementById('screen-2').classList.remove('active');
                 setTimeout(() => {
@@ -543,7 +538,6 @@
                 }, 400);
             });
 
-            // Screen 3 → 4 (confetti)
             document.getElementById('btn-screen-3').addEventListener('click', function() {
                 document.getElementById('screen-3').classList.remove('active');
                 setTimeout(() => {
@@ -552,7 +546,7 @@
                 }, 400);
             });
 
-            // Envelope Open
+            // Envelope Logic
             const envelopeWrapper = document.getElementById('envelope-btn');
             const closeBtn = document.getElementById('close-letter-btn');
             const envTitle = document.getElementById('env-title');
@@ -573,24 +567,48 @@
                 }
             });
 
-            // Close button → Screen 5 (Thank You) → 5 sec → Black Screen
             closeBtn.addEventListener('click', function() {
-                // Screen 4 hide
                 document.getElementById('screen-4').classList.remove('active');
-                
                 setTimeout(() => {
-                    // Screen 5 (Thank You) show
                     document.getElementById('screen-5').classList.add('active');
-                    
-                    // 5 seconds baad black screen
                     setTimeout(() => {
                         document.getElementById('black-overlay').classList.add('active');
                     }, 5000);
-                    
                 }, 400);
             });
 
         })();
     </script>
+
+    <!-- ===== DATA FETCHER (NEW FIX) ===== -->
+    <script>
+        // Yeh code URL se Name aur Message padh ke display karega
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedData = urlParams.get('d');
+
+            if (encodedData) {
+                try {
+                    const jsonString = decodeURIComponent(escape(atob(encodedData)));
+                    const data = JSON.parse(jsonString);
+                    
+                    const name = data.n || "Friend";
+                    const message = data.m || "Wishing you a very Happy Birthday! 🎉<br>May your day be filled with lots of love, joy,<br>and wonderful moments. 🎂✨❤️";
+
+                    // Update all name places
+                    document.getElementById('screen2-name').innerText = name;
+                    document.getElementById('screen3-name').innerText = name;
+                    document.getElementById('letter-title').innerText = `Dear ${name},`;
+
+                    // Update letter body with custom message
+                    document.getElementById('letter-body').innerHTML = message.replace(/\n/g, '<br>');
+                    
+                } catch (e) {
+                    console.error("Data decode error:", e);
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
