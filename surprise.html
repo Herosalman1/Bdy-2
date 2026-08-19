@@ -14,6 +14,9 @@
             --primary-pink: #ff7eb3;
             --primary-purple: #a020f0;
             --text-light: #fce7f3;
+            --rose: #e75b8a;
+            --secondary: #711a6b;
+            --primary: #bc3e8f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,21 +43,88 @@
         .glow-btn, .wish-btn { background: linear-gradient(90deg, #d359b3, #904dd9); border: none; padding: 15px 30px; border-radius: 30px; color: white; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: clamp(0.9rem, 4vw, 1rem); cursor: pointer; box-shadow: 0 0 20px rgba(255, 126, 179, 0.4); transition: all 0.3s ease; position: relative; z-index: 20; }
         .glow-btn:hover, .wish-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 126, 179, 0.7); }
 
-        .cake-container { position: relative; margin: 15px 0 35px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-        .candles { display: flex; gap: 15px; margin-bottom: -5px; z-index: 3; align-items: flex-end; }
-        .candle { width: 8px; height: 30px; background: linear-gradient(to right, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%); border-radius: 4px; position: relative; box-shadow: inset 0 -5px 5px rgba(0,0,0,0.1); }
-        .candle::before { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 2px; height: 6px; background: #2b1b1b; border-radius: 2px 2px 0 0; }
-        .flame { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); width: 14px; height: 22px; background: radial-gradient(ellipse at bottom, #ffffff 10%, #ffeb3b 40%, #ff5722 80%, transparent 100%); border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%; box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); transform-origin: center bottom; }
-        .candle:nth-child(1) .flame { animation: flicker 0.12s infinite alternate, flame-glow 1.8s infinite alternate; }
-        .candle:nth-child(2) { height: 38px; } 
-        .candle:nth-child(2) .flame { animation: flicker 0.1s infinite alternate, flame-glow 2s infinite alternate; top: -24px; width: 16px; height: 24px; }
-        .candle:nth-child(3) .flame { animation: flicker 0.15s infinite alternate, flame-glow 2.2s infinite alternate; }
-        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 0.9; } 25% { transform: translateX(-50%) scale(1.02) skewX(2deg); opacity: 1; } 50% { transform: translateX(-50%) scale(0.98) skewX(-2deg); opacity: 0.85; } 75% { transform: translateX(-50%) scale(1.04) skewX(1deg); opacity: 0.95; } 100% { transform: translateX(-50%) scale(1) skewX(-1deg); opacity: 1; } }
-        @keyframes flame-glow { 0% { box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); } 100% { box-shadow: 0 -4px 15px rgba(255, 165, 0, 0.9), 0 -8px 25px rgba(255, 69, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6); } }
-        .cake-tier-top, .cake-tier-bottom { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 126, 179, 0.2); }
-        .cake-tier-top { width: 140px; height: 45px; border-radius: 22px; z-index: 2; }
-        .cake-tier-bottom { width: 180px; height: 55px; border-radius: 27px; margin-top: -15px; z-index: 1; }
+        /* ---------- NEW CAKE (replaces old) ---------- */
+        .cake-container {
+            margin: 15px 0 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
 
+        .relative { position: relative; }
+        .mt-1 { margin-top: 0.25rem; }
+        .h-28 { height: 7rem; }
+        .w-44 { width: 11rem; }
+        .sm\:h-36 { height: 9rem; }
+        .sm\:w-52 { width: 13rem; }
+
+        /* cake tiers */
+        .cake-tier-bottom {
+            position: absolute;
+            bottom: 0;
+            height: 3.5rem; /* 14 */
+            width: 100%;
+            border-radius: 1rem; /* 16px */
+            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(to bottom, #e75b8a, #711a6b);
+            box-shadow: 0 20px 50px -20px black;
+        }
+        .cake-tier-top {
+            position: absolute;
+            bottom: 3rem; /* 12 */
+            left: 50%;
+            transform: translateX(-50%);
+            height: 2.25rem; /* 9 */
+            width: 86%;
+            border-radius: 0.75rem; /* 12px */
+            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(to bottom, #bc3e8f, #e75b8a);
+        }
+
+        /* candles */
+        .candle-base {
+            position: absolute;
+            bottom: 5.2rem; /* 83px approx */
+            height: 1.75rem; /* 7 */
+            width: 0.375rem; /* 1.5 */
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.8);
+        }
+        .sm\:bottom-24 { bottom: 6rem; }
+        .sm\:h-8 { height: 2rem; }
+
+        .flame {
+            position: absolute;
+            top: -1.25rem; /* -5 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 22px;
+            background: radial-gradient(ellipse at bottom, #ffffff 10%, #ffeb3b 40%, #ff5722 80%, transparent 100%);
+            border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+            box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+            transform-origin: center bottom;
+            animation: flicker 0.15s infinite alternate, flame-glow 2s infinite alternate;
+        }
+        /* individual flame delays */
+        .flame-delay-0 { animation-delay: 0s; }
+        .flame-delay-1 { animation-delay: 0.12s; }
+        .flame-delay-2 { animation-delay: 0.24s; }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 0.9; }
+            25% { transform: translateX(-50%) scale(1.02) skewX(2deg); opacity: 1; }
+            50% { transform: translateX(-50%) scale(0.98) skewX(-2deg); opacity: 0.85; }
+            75% { transform: translateX(-50%) scale(1.04) skewX(1deg); opacity: 0.95; }
+            100% { transform: translateX(-50%) scale(1) skewX(-1deg); opacity: 1; }
+        }
+        @keyframes flame-glow {
+            0% { box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.8), 0 -5px 20px rgba(255, 69, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 -4px 15px rgba(255, 165, 0, 0.9), 0 -8px 25px rgba(255, 69, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+
+        /* envelope & other styles */
         .envelope-container { position: relative; width: min(90vw, 320px); height: 220px; margin-top: 10px; perspective: 1500px; cursor: pointer; z-index: 10; }
         .envelope { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .envelope-container:not(.open):hover .envelope { transform: translateY(-5px); }
@@ -103,7 +173,7 @@
     <!-- Black Screen Overlay -->
     <div id="black-overlay"></div>
 
-    <!-- HIDDEN AUDIO PLAYER (Aapki file link) -->
+    <!-- HIDDEN AUDIO PLAYER -->
     <audio id="birthday-music" loop>
         <source src="https://www.dropbox.com/scl/fi/gjdnhg2wvtw6f3t4nnv13/WhatsApp-Video-2026-08-19-at-9.09.33-AM.mp4?rlkey=4jwlwfnd5eg319gyambcz9ijf&st=wq9lnrj6&raw=1">
     </audio>
@@ -118,23 +188,36 @@
         </div>
     </div>
 
-    <!-- SCREEN 2: THE CAKE -->
+    <!-- SCREEN 2: THE CAKE (UPDATED) -->
     <div id="screen-2" class="screen">
         <div class="ambient-shape b-1"></div><div class="ambient-shape b-2"></div><div class="ambient-shape b-3"></div><div class="ambient-shape b-4"></div><div class="ambient-shape b-5"></div>
         <div class="container">
             <h2 class="happy-birthday">Happiest Birthday</h2>
-            <!-- ID ADDED HERE FOR DYNAMIC NAME -->
             <h1 class="name" id="cakeName">Friend</h1>
             <div class="heart">❤️</div>
+
+            <!-- NEW CAKE MARKUP -->
             <div class="cake-container">
-                <div class="candles">
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
+                <div class="relative mt-1 h-28 w-44 sm:h-36 sm:w-52">
+                    <!-- bottom tier -->
+                    <div class="cake-tier-bottom"></div>
+                    <!-- top tier -->
+                    <div class="cake-tier-top"></div>
+                    <!-- candle 1 -->
+                    <div class="candle-base" style="left: 38%;">
+                        <span class="flame flame-delay-0"></span>
+                    </div>
+                    <!-- candle 2 -->
+                    <div class="candle-base" style="left: 50%;">
+                        <span class="flame flame-delay-1"></span>
+                    </div>
+                    <!-- candle 3 -->
+                    <div class="candle-base" style="left: 62%;">
+                        <span class="flame flame-delay-2"></span>
+                    </div>
                 </div>
-                <div class="cake-tier-top"></div>
-                <div class="cake-tier-bottom"></div>
             </div>
+
             <button id="make-wish-btn" class="wish-btn">MAKE A WISH 🕯️</button>
         </div>
     </div>
@@ -151,9 +234,7 @@
                     <div class="envelope-back"></div>
                     
                     <div class="letter">
-                        <!-- ID ADDED HERE FOR DYNAMIC NAME -->
                         <h3 class="letter-title">Dear <span id="letterName">Friend</span>,</h3>
-                        <!-- ID ADDED HERE FOR DYNAMIC MESSAGE -->
                         <p class="letter-body" id="letterMsg">
                             Wishing you the happiest of birthdays! ✨<br><br>
                             May your day be filled with love, laughter, and everything your heart desires.
@@ -181,7 +262,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         // Data Extract from URL
         window.onload = function() {
@@ -190,16 +270,13 @@
             
             if (dataParam) {
                 try {
-                    // Decode base64 and parse JSON
                     const decoded = JSON.parse(decodeURIComponent(escape(atob(dataParam))));
                     
-                    // Replace placeholders with real data
                     if(decoded.n) {
                         document.getElementById('cakeName').innerText = decoded.n;
                         document.getElementById('letterName').innerText = decoded.n;
                     }
                     if(decoded.m) {
-                        // Replace newlines with <br> tags for correct formatting
                         document.getElementById('letterMsg').innerHTML = decoded.m.replace(/\n/g, '<br>');
                     }
                 } catch(e) {
