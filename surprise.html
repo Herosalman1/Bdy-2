@@ -321,12 +321,12 @@
 
     <div id="black-overlay"></div>
 
-    <!-- HIDDEN AUDIO PLAYER FROM OLD CODE -->
-    <audio id="birthday-music" loop>
+    <!-- ===== AUDIO PLAYER ===== -->
+    <audio id="birthday-music" loop preload="auto">
         <source src="https://www.dropbox.com/scl/fi/gjdnhg2wvtw6f3t4nnv13/WhatsApp-Video-2026-08-19-at-9.09.33-AM.mp4?rlkey=4jwlwfnd5eg319gyambcz9ijf&st=wq9lnrj6&raw=1">
     </audio>
 
-    <!-- ===== BACKGROUND BALLOONS LAYER (HIDDEN BY DEFAULT) ===== -->
+    <!-- ===== BACKGROUND BALLOONS LAYER ===== -->
     <div class="balloon-layer" id="balloon-container" aria-hidden="true">
         <div class="balloon" style="left: 10%; animation-duration: 15s; animation-delay: 0s;">
             <div class="h-12 w-9 rounded-[50%_50%_48%_48%] opacity-70 blur-[0.3px] bg-[#d359b3] shadow-[0_0_26px_#d359b3]"></div>
@@ -396,9 +396,10 @@
     <div id="screen-1" class="screen active">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-6 text-center">
             <div class="min-h-[10rem] flex flex-col items-center justify-center gap-3">
-<p class="font-display text-foreground fade-in-line whitespace-nowrap" style="font-size: clamp(1.2rem, 5vw, 1.875rem); animation-delay: 0.5s;">Hey… 👀</p>
-<p class="font-sans text-foreground/80 fade-in-line whitespace-nowrap" style="font-size: clamp(0.9rem, 4vw, 1rem); animation-delay: 2s;">Today is your birthday 🎉🥂</p>
-<p class="font-sans text-foreground/80 fade-in-line whitespace-nowrap" style="font-size: clamp(0.75rem, 3.2vw, 1rem); animation-delay: 4s;">Quickly click below now, it's a surprise. 🤫❤️</p>            </div>
+                <p class="font-display text-foreground fade-in-line whitespace-nowrap" style="font-size: clamp(1.2rem, 5vw, 1.875rem); animation-delay: 0.5s;">Hey… 👀</p>
+                <p class="font-sans text-foreground/80 fade-in-line whitespace-nowrap" style="font-size: clamp(0.9rem, 4vw, 1rem); animation-delay: 2s;">Today is your birthday 🎉🥂</p>
+                <p class="font-sans text-foreground/80 fade-in-line whitespace-nowrap" style="font-size: clamp(0.75rem, 3.2vw, 1rem); animation-delay: 4s;">Quickly click below now, it's a surprise. 🤫❤️</p>
+            </div>
             <div>
                 <button id="btn-screen-1" class="glow-btn fade-in-btn" style="animation-delay: 5.5s;">
                     <span class="relative z-10">Open my surprise ✨</span>
@@ -407,12 +408,14 @@
         </div>
     </div>
 
-    <!-- ===== SCREEN 2 (Gift) ===== -->
+    <!-- ===== SCREEN 2 (Gift) - FIXED FOR UNLIMITED WIDTH ===== -->
     <div id="screen-2" class="screen">
-        <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
-            <p class="font-display leading-snug text-foreground" style="font-size: 2rem;">
-                This one's specially for you, <br>
-                <span class="text-gradient font-bold mt-2 inline-block whitespace-nowrap" id="screen2-name" style="font-size: 2rem;"></span> 🎁
+        <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center px-2">
+            <p class="font-display leading-snug text-foreground flex flex-col items-center gap-1 w-full">
+                <span class="whitespace-nowrap" style="font-size: clamp(1.3rem, 6vw, 2rem);">This one's specially for you,</span>
+                <span class="whitespace-nowrap" style="font-size: clamp(1.6rem, 8vw, 2rem);">
+                    <span class="text-gradient font-bold" id="screen2-name"></span> 🎁
+                </span>
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
@@ -434,14 +437,15 @@
 
     <!-- ===== SCREEN 3 (Cake) ===== -->
     <div id="screen-3" class="screen">
-        <div class="relative z-10 flex w-full max-w-lg flex-col items-center gap-5 text-center sm:gap-8">
+        <div class="relative z-10 flex w-full max-w-lg flex-col items-center gap-5 text-center sm:gap-8 px-2">
             
-            <h1 class="font-poppins text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; transform: none; max-width: 100vw; filter: blur(0px); letter-spacing: 0.18em;">
+            <h1 class="font-poppins text-[clamp(1.5rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase whitespace-nowrap" style="opacity: 1; transform: none; max-width: 100vw; filter: blur(0px); letter-spacing: 0.18em;">
                 Happy Birthday
             </h1>
             
-<p class="font-display text-[clamp(3rem,9vw,3rem)] leading-none text-gradient whitespace-nowrap" style="opacity: 1; transform: none; max-width: 100vw; margin-top: -25px; margin-bottom: 0px;" id="screen3-name"></p>            
-            <span class="-mt-2 text-4xl drop-shadow-lg" style="transform: none;">❤️</span>
+            <p class="font-display text-[clamp(2.5rem,9vw,3rem)] leading-none text-gradient whitespace-nowrap" style="opacity: 1; transform: none; max-width: 100vw; margin-top: -25px; margin-bottom: 0px;" id="screen3-name"></p>
+            
+            <span class="-mt-2 text-4xl drop-shadow-lg whitespace-nowrap" style="transform: none;">❤️</span>
             
             <div class="relative flex flex-col items-center justify-end h-36 w-full mt-2 mb-6">
                 <div class="flex gap-5 mb-[-6px] z-20">
@@ -464,7 +468,7 @@
             </div>
 
             <div class="mt-2 sm:mt-4">
-                <button id="btn-screen-3" class="glow-btn uppercase text-sm tracking-wider px-8 py-3">
+                <button id="btn-screen-3" class="glow-btn uppercase text-sm tracking-wider px-8 py-3 whitespace-nowrap">
                     <span class="relative z-10">♡ One More Surprise ♡</span>
                 </button>
             </div>
@@ -475,13 +479,13 @@
     <!-- ===== SCREEN 4 (Envelope) ===== -->
     <div id="screen-4" class="screen">
         <div class="container flex flex-col items-center text-center max-w-md mx-auto">
-            <h2 class="font-display text-foreground mb-5 transition-opacity duration-300" id="env-title" style="font-size: 1.5rem;">♡ ᴀ sᴘᴇᴄɪᴀʟ ɴᴏᴛᴇ ꜰᴏʀ ʏᴏᴜ ♡</h2>
+            <h2 class="font-display text-foreground mb-5 transition-opacity duration-300 whitespace-nowrap" id="env-title" style="font-size: clamp(1rem, 5vw, 1.5rem);">♡ ᴀ sᴘᴇᴄɪᴀʟ ɴᴏᴛᴇ ꜰᴏʀ ʏᴏᴜ ♡</h2>
 
             <div class="envelope-wrapper" id="envelope-btn">
                 <div class="envelope">
                     <div class="envelope-back"></div>
                     <div class="letter-content">
-                        <h3 class="letter-title" id="letter-title" style="font-size: 1.1rem;">Dear Friend,</h3>
+                        <h3 class="letter-title whitespace-nowrap" id="letter-title" style="font-size: 1.1rem;">Dear Friend,</h3>
                         <p class="letter-body" id="letter-body" style="font-size: 0.7rem;">
                             Wishing you a very Happy Birthday! 🎉<br />
                             May your day be filled with lots of love, joy,<br />
@@ -495,24 +499,48 @@
                 </div>
             </div>
 
-            <div class="mt-5 text-white/60 tracking-wider transition-opacity duration-300" id="env-instruction" style="font-size: 0.875rem;">⤤ Tap envelope to open ⤣</div>
+            <div class="mt-5 text-white/60 tracking-wider transition-opacity duration-300 whitespace-nowrap" id="env-instruction" style="font-size: 0.875rem;">⤤ Tap envelope to open ⤣</div>
 
-            <button id="close-letter-btn" class="glow-btn mt-6 hidden opacity-0 transition-opacity duration-500">Close Surprise ✨</button>
+            <button id="close-letter-btn" class="glow-btn mt-6 hidden opacity-0 transition-opacity duration-500 whitespace-nowrap">Close Surprise ✨</button>
         </div>
     </div>
 
     <!-- ===== SCREEN 5 (THANK YOU) ===== -->
     <div id="screen-5" class="screen">
-        <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-md mx-auto">
-            <h1 class="font-display text-gradient font-bold mb-6" style="font-size: 3rem;">Thank You ❤️</h1>
-            <p class="font-sans text-foreground/80 font-medium" style="font-size: 1rem;">For taking the time to see this small surprise.</p>
-            <p class="font-sans text-foreground/80 font-medium mt-2" style="font-size: 1rem;">Once again, wishing you a very Happy Birthday!</p>
+        <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-md mx-auto px-2">
+            <h1 class="font-display text-gradient font-bold mb-6 whitespace-nowrap" style="font-size: clamp(2rem, 8vw, 3rem);">Thank You ❤️</h1>
+            <p class="font-sans text-foreground/80 font-medium whitespace-nowrap" style="font-size: clamp(0.7rem, 3.5vw, 1rem);">For taking the time to see this small surprise.</p>
+            <p class="font-sans text-foreground/80 font-medium mt-2 whitespace-nowrap" style="font-size: clamp(0.7rem, 3.5vw, 1rem);">Once again, wishing you a very Happy Birthday!</p>
         </div>
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
         (function() {
+            let audioStarted = false;
+            function forcePlayMusic() {
+                if (!audioStarted) {
+                    const bgMusic = document.getElementById('birthday-music');
+                    let promise = bgMusic.play();
+                    if (promise !== undefined) {
+                        promise.then(_ => {
+                            audioStarted = true;
+                            ['click', 'touchstart', 'scroll'].forEach(evt => 
+                                document.removeEventListener(evt, forcePlayMusic)
+                            );
+                        }).catch(error => {
+                            console.log("Browser still blocking autoplay.");
+                        });
+                    }
+                }
+            }
+
+            ['click', 'touchstart', 'scroll'].forEach(evt => 
+                document.addEventListener(evt, forcePlayMusic, { once: false })
+            );
+
+            window.addEventListener('load', forcePlayMusic);
+
             function fireConfetti() {
                 if (typeof confetti === 'function') {
                     confetti({
@@ -533,9 +561,7 @@
             }
 
             document.getElementById('btn-screen-1').addEventListener('click', function() {
-                // START MUSIC WHEN FIRST BUTTON IS CLICKED (FROM OLD CODE)
-                const bgMusic = document.getElementById('birthday-music');
-                bgMusic.play().catch(error => console.log("Audio issue", error));
+                forcePlayMusic();
 
                 document.getElementById('screen-1').classList.remove('active');
                 setTimeout(() => {
@@ -548,7 +574,6 @@
                 setTimeout(() => {
                     document.getElementById('screen-3').classList.add('active');
                     
-                    // START BALLOONS WHEN CAKE PAGE (SCREEN-3) IS ACTIVE
                     document.getElementById('balloon-container').classList.add('show-balloons');
                     
                     fireConfetti();
@@ -560,7 +585,6 @@
                 setTimeout(() => {
                     document.getElementById('screen-4').classList.add('active');
                     
-                    // STOP BALLOONS WHEN MOVING TO ENVELOPE PAGE
                     document.getElementById('balloon-container').classList.remove('show-balloons');
                     
                     fireConfetti();
@@ -614,7 +638,6 @@
                     
                     let rawName = data.n || "Friend";
                     
-                    // SHIVANI WALI ELEGANCE: Capitalizes properly (e.g. "Ram Lal Kumar")
                     let formattedName = rawName.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
                     const message = data.m || "Wishing you a very Happy Birthday! 🎉<br>May your day be filled with lots of love,<br>Joy, and wonderful moments. 🎂✨❤️";
