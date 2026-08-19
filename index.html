@@ -49,23 +49,22 @@
                 return;
             }
 
-            // Data ko JSON banakar Base64 encode karna (Emojis ke liye safe)
             const payload = { n: name, m: msg };
             const encodedData = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
             
-            // --- FIXED URL LOGIC ---
+            /* ===== GITHUB PAGES KA EXACT URL SYSTEM ===== */
             let baseUrl = window.location.href.split('?')[0];
             
-            // Agar GitHub Pages ka root URL hai toh 'index.html' replace karna zaroori nahi, par safe rakhne ke liye hai
+            // Agar URL ke end mein index.html hai toh hatao
             if(baseUrl.endsWith('index.html')) {
                 baseUrl = baseUrl.replace('index.html', '');
             }
-            // Make sure there's just one slash
+            
+            // Ensure karo ki ek hi slash ho
             if(!baseUrl.endsWith('/')) baseUrl += '/';
             
-            // SURPRISE FILE KA NAAM EXACTLY MATCH KARNA ZAROORI HAI
+            // Surprise file ko call karo
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
-            // -----------------------
             
             document.getElementById('generatedUrl').innerText = finalLink;
             document.getElementById('resultBox').style.display = 'block';
