@@ -114,6 +114,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .shine-text {
+            color: #ffffff;
+            background: linear-gradient(to right, #ffffff 20%, #d359b3 40%, #c874ff 60%, #ffffff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
         .screen {
             position: absolute;
             inset: 0;
@@ -243,14 +255,14 @@
         .letter-content .letter-title {
             font-family: 'Playfair Display', serif;
             color: #7d258e;
-            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 6px;
+            text-align: left;
         }
         .letter-content .letter-body {
             color: #2d1a33;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.4;
+            text-align: center;
         }
 
         .envelope-wrapper.open .envelope-flap { transform: rotateX(-180deg); z-index: 1; }
@@ -341,9 +353,9 @@
     <div id="screen-1" class="screen active">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-6 text-center">
             <div class="min-h-[10rem] flex flex-col items-center justify-center gap-3">
-                <p class="font-display text-3xl text-foreground fade-in-line" style="animation-delay: 0.5s;">Hey… 👀</p>
-                <p class="font-sans text-base text-foreground/80 fade-in-line" style="animation-delay: 2s;">Today is your birthday 🎉🥂</p>
-                <p class="font-sans text-base text-foreground/80 fade-in-line" style="animation-delay: 4s;">Quickly click below now, it's a surprise. 🤫❤️</p>
+                <p class="font-display text-foreground fade-in-line" style="font-size: 1.875rem; animation-delay: 0.5s;">Hey… 👀</p>
+                <p class="font-sans text-foreground/80 fade-in-line" style="font-size: 1rem; animation-delay: 2s;">Today is your birthday 🎉🥂</p>
+                <p class="font-sans text-foreground/80 fade-in-line" style="font-size: 1rem; animation-delay: 4s;">Quickly click below now, it's a surprise. 🤫❤️</p>
             </div>
             <div>
                 <button id="btn-screen-1" class="glow-btn fade-in-btn" style="animation-delay: 5.5s;">
@@ -353,11 +365,12 @@
         </div>
     </div>
 
-    <!-- SCREEN 2 (Gift) -->
+    <!-- ===== SCREEN 2 (Gift) ===== -->
     <div id="screen-2" class="screen">
         <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-9 text-center">
-            <p class="font-display text-2xl leading-snug text-foreground">
-                This one's specially for you, <br><span class="text-gradient text-3xl font-bold mt-2 inline-block" id="screen2-name">Friend</span> 🎁
+            <p class="font-display leading-snug text-foreground" style="font-size: 1.5rem;">
+                This one's specially for you, <br>
+                <span class="text-gradient font-bold mt-2 inline-block" id="screen2-name" style="font-size: 2.25rem;">Friend</span> 🎁
             </p>
             <div class="relative h-56 w-56">
                 <div class="absolute inset-0">
@@ -377,23 +390,28 @@
         </div>
     </div>
 
-    <!-- SCREEN 3 (Cake) -->
+    <!-- ===== SCREEN 3 (Cake) ===== -->
     <div id="screen-3" class="screen">
-        <div class="relative z-10 flex w-full max-w-md flex-col items-center gap-2 text-center">
-            <p class="font-sans text-xl md:text-2xl font-bold tracking-[0.3em] text-white uppercase mb-2 drop-shadow-md">Happy Birthday</p>
-            <h1 class="font-display text-4xl md:text-5xl text-gradient pb-1 font-bold leading-tight" id="screen3-name">Friend</h1>
-            <div class="text-rose-400 text-xl mt-1 mb-6">❤️</div>
-
-            <div class="relative flex flex-col items-center justify-end h-36 w-full mb-8">
+        <div class="relative z-10 flex w-full max-w-lg flex-col items-center gap-5 text-center sm:gap-8">
+            
+            <h1 class="font-poppins text-[clamp(1.6rem,5vw,2.8rem)] font-semibold tracking-[0.18em] shine-text uppercase" style="opacity: 1; filter: blur(0px); letter-spacing: 0.18em;">
+                Happy Birthday
+            </h1>
+            
+            <p class="font-display text-[clamp(3rem,12vw,5.5rem)] leading-none text-gradient" style="opacity: 1; transform: none;" id="screen3-name">Friend</p>
+            
+            <span class="-mt-2 text-4xl drop-shadow-lg" style="transform: none;">❤️</span>
+            
+            <div class="relative flex flex-col items-center justify-end h-36 w-full mt-2 mb-6">
                 <div class="flex gap-5 mb-[-6px] z-20">
                     <div class="relative h-10 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm">
-                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full"></div>
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="transform: translateX(-50%);"></div>
                     </div>
                     <div class="relative h-12 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm -translate-y-3">
-                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.2s;"></div>
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.2s; transform: translateX(-50%);"></div>
                     </div>
                     <div class="relative h-10 w-2.5 bg-gradient-to-b from-white to-white/70 rounded-t-sm">
-                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.4s;"></div>
+                        <div class="flame absolute -top-5 left-1/2 w-2.5 h-4 bg-yellow-400 rounded-full" style="animation-delay: 0.4s; transform: translateX(-50%);"></div>
                     </div>
                 </div>
                 <div class="h-12 w-40 rounded-full bg-[#bd5d9b] z-10 shadow-[0_-2px_18px_rgba(211,89,179,0.4)] border border-white/20 relative overflow-hidden">
@@ -404,23 +422,27 @@
                 </div>
             </div>
 
-            <button id="btn-screen-3" class="glow-btn uppercase text-sm tracking-wider px-8 py-3">
-                <span class="relative z-10">Make a wish 🕯️</span>
-            </button>
+            <div class="mt-2 sm:mt-4">
+                <button id="btn-screen-3" class="glow-btn uppercase text-sm tracking-wider px-8 py-3">
+                    <span class="relative z-10">One More Surprise 💌</span>
+                </button>
+            </div>
+            
         </div>
     </div>
 
-    <!-- SCREEN 4 (Envelope) -->
+    <!-- ===== SCREEN 4 (Envelope) - FONT SIZE REDUCED ===== -->
     <div id="screen-4" class="screen">
         <div class="container flex flex-col items-center text-center max-w-md mx-auto">
-            <h2 class="font-display text-2xl text-foreground mb-5 transition-opacity duration-300" id="env-title">💌 A Special Note For You</h2>
+            <h2 class="font-display text-foreground mb-5 transition-opacity duration-300" id="env-title" style="font-size: 1.5rem;">♡ ᴀ sᴘᴇᴄɪᴀʟ ɴᴏᴛᴇ ꜰᴏʀ ʏᴏᴜ ♡</h2>
 
             <div class="envelope-wrapper" id="envelope-btn">
                 <div class="envelope">
                     <div class="envelope-back"></div>
                     <div class="letter-content">
-                        <h3 class="letter-title" id="letter-title">Dear Friend,</h3>
-                        <p class="letter-body" id="letter-body">
+                        <h3 class="letter-title" id="letter-title" style="font-size: 1.1rem;">Dear Friend,</h3>
+                        <!-- SIZE 0.8rem KAR DIYA HAI -->
+                        <p class="letter-body" id="letter-body" style="font-size: 0.7rem;">
                             Wishing you a very Happy Birthday! 🎉<br />
                             May your day be filled with lots of love, joy,<br />
                             and wonderful moments. 🎂✨❤️
@@ -433,18 +455,18 @@
                 </div>
             </div>
 
-            <div class="mt-5 text-sm text-white/60 tracking-wider transition-opacity duration-300" id="env-instruction">👇 Tap envelope to open</div>
+            <div class="mt-5 text-white/60 tracking-wider transition-opacity duration-300" id="env-instruction" style="font-size: 0.875rem;">👇 Tap envelope to open</div>
 
             <button id="close-letter-btn" class="glow-btn mt-6 hidden opacity-0 transition-opacity duration-500">Close Surprise ✨</button>
         </div>
     </div>
 
-    <!-- SCREEN 5 (THANK YOU) -->
+    <!-- ===== SCREEN 5 (THANK YOU) ===== -->
     <div id="screen-5" class="screen">
         <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-md mx-auto">
-            <h1 class="font-display text-5xl md:text-6xl text-gradient font-bold mb-6">Thank You ❤️</h1>
-            <p class="font-sans text-base text-foreground/80 font-medium">For taking the time to see this small surprise.</p>
-            <p class="font-sans text-base text-foreground/80 font-medium mt-2">Once again, wishing you a very Happy Birthday!</p>
+            <h1 class="font-display text-gradient font-bold mb-6" style="font-size: 3rem;">Thank You ❤️</h1>
+            <p class="font-sans text-foreground/80 font-medium" style="font-size: 1rem;">For taking the time to see this small surprise.</p>
+            <p class="font-sans text-foreground/80 font-medium mt-2" style="font-size: 1rem;">Once again, wishing you a very Happy Birthday!</p>
         </div>
     </div>
 
@@ -526,7 +548,7 @@
         })();
     </script>
 
-    <!-- ===== DATA FETCHER (LINE BREAK FIXED) ===== -->
+    <!-- ===== DATA FETCHER ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -538,8 +560,7 @@
                     const data = JSON.parse(jsonString);
                     
                     const name = data.n || "Friend";
-                    // Yahan `replace(/\n/g, '<br>')` use kiya hai taaki Custom message jaisa type kiya waisa hi dikhe, next line break sahi ho
-                    const message = data.m || "Wishing you a very Happy Birthday! 🎉<br>May your day be filled with lots of love, joy,<br>and wonderful moments. 🎂✨❤️";
+                    const message = data.m || "Wishing you a very Happy Birthday! 🎉<br>May your day be filled with lots of love,<br>Joy, and wonderful moments. 🎂✨❤️";
 
                     document.getElementById('screen2-name').innerText = name;
                     document.getElementById('screen3-name').innerText = name;
