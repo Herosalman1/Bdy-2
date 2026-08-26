@@ -1,0 +1,1 @@
+> **⚠️ COPYRIGHT NOTICE:** This repository is public for viewing purposes only. Unauthorized copying, pasting, cloning, or commercial use of this code is strictly prohibited and protected under international copyright laws.
