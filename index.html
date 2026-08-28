@@ -35,10 +35,14 @@
         <h2>Link Generator ✨</h2>
         
         <label>Friend's Name:</label>
-        <input type="text" id="friendName" placeholder="e.g. Rahul, Priya..." autocomplete="off">
+        <!-- Pehle se name mention kiya gaya hai jise modify kiya ja sake -->
+        <input type="text" id="friendName" value="SALMAN" autocomplete="off">
         
         <label>Custom Message:</label>
-        <textarea id="customMessage" placeholder="Type your special birthday wishes here..."></textarea>
+        <!-- Pehle se default birthday message mention kiya gaya hai -->
+        <textarea id="customMessage">Wishing you a very Happy Birthday! 🎉
+May your day be filled with lots of love,
+Joy, and wonderful moments. 🎂✨❤️</textarea>
         
         <!-- Hidden URL storage -->
         <input type="hidden" id="generatedUrl">
@@ -54,14 +58,12 @@
     </div>
 
     <script>
-        // Title Case function (e.g., diya -> Diya)
         function toTitleCase(str) {
           return str.toLowerCase().replace(/(?:^|\s)\w/g, function(match) {
             return match.toUpperCase();
           });
         }
 
-        // Auto format friend's name to Title Case while typing
         document.getElementById('friendName').addEventListener('input', function(e) {
           let start = this.selectionStart;
           let end = this.selectionEnd;
@@ -105,7 +107,6 @@
             
             const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
             
-            // Save link to hidden input
             document.getElementById('generatedUrl').value = finalLink;
             resultBox.style.display = 'block';
         }
@@ -128,7 +129,7 @@
         function previewLink() {
             const linkText = document.getElementById('generatedUrl').value;
             if(linkText) {
-                window.location.href = linkText;
+                window.open(linkText, '_blank');
             }
         }
     </script>
