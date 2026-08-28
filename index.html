@@ -35,20 +35,19 @@
         <h2>Link Generator ✨</h2>
         
         <label>Friend's Name:</label>
-        <!-- Pehle se name mention kiya gaya hai jise modify kiya ja sake -->
-        <input type="text" id="friendName" value="SALMAN" autocomplete="off">
+        <input type="text" id="friendName" value="Priya Kumari" autocomplete="off">
         
         <label>Custom Message:</label>
-        <!-- Pehle se default birthday message mention kiya gaya hai -->
         <textarea id="customMessage">Wishing you a very Happy Birthday! 🎉
 May your day be filled with lots of love,
 Joy, and wonderful moments. 🎂✨❤️</textarea>
         
-        <!-- Hidden URL storage -->
+        <!-- Hidden URL storage (No raw text shown) -->
         <input type="hidden" id="generatedUrl">
 
         <button class="btn-main" id="genBtn" onclick="generateLink()">Generate Link 🔗</button>
 
+        <!-- Result Box containing Action Buttons -->
         <div id="resultBox" class="result-box">
             <div class="btn-group">
                 <button id="copyBtn" class="btn-secondary btn-copy" onclick="copyLink()">Copy Link 📋</button>
@@ -58,18 +57,30 @@ Joy, and wonderful moments. 🎂✨❤️</textarea>
     </div>
 
     <script>
+        // Title Case function
         function toTitleCase(str) {
           return str.toLowerCase().replace(/(?:^|\s)\w/g, function(match) {
             return match.toUpperCase();
           });
         }
 
+        // Auto format friend's name
         document.getElementById('friendName').addEventListener('input', function(e) {
           let start = this.selectionStart;
           let end = this.selectionEnd;
           this.value = toTitleCase(this.value);
           this.setSelectionRange(start, end); 
         });
+
+        // 100% STRICT RULE 2: Robust ASCII Digit Encoder via charCodeAt
+        function encodeToASCII(str) {
+            if (!str) return '';
+            let arr = [];
+            for (let i = 0; i < str.length; i++) {
+                arr.push(str.charCodeAt(i));
+            }
+            return arr.join('-');
+        }
 
         function generateLink() {
             const nameInput = document.getElementById('friendName');
@@ -93,20 +104,27 @@ Joy, and wonderful moments. 🎂✨❤️</textarea>
                 return;
             }
 
+            // Create JSON Object
             const payload = { n: name, m: msg };
-            const base64Data = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-            const encodedData = encodeURIComponent(base64Data);
+            const payloadStr = JSON.stringify(payload);
             
-            let baseUrl = window.location.href.split('?')[0];
+            // Encode entirely into ASCII digits (Rule 2)
+            const encodedHashData = encodeToASCII(payloadStr);
+            const shortKey = 'bday_' + encodeToASCII(name || "friend");
             
+            // Save to localStorage as Fallback (Rule 3)
+            localStorage.setItem(shortKey, payloadStr);
+            
+            let baseUrl = window.location.href.split('?')[0].split('#')[0];
             if(baseUrl.endsWith('index.html')) {
                 baseUrl = baseUrl.replace('index.html', '');
             }
-            
             if(!baseUrl.endsWith('/')) baseUrl += '/';
             
-            const finalLink = `${baseUrl}surprise.html?d=${encodedData}`;
+            // Setup dual fetch Link: Hash for message, Query for Name mapping
+            const finalLink = `${baseUrl}surprise.html?key=${shortKey}#m=${encodedHashData}`;
             
+            // Save link to hidden input (Rule 4)
             document.getElementById('generatedUrl').value = finalLink;
             resultBox.style.display = 'block';
         }
